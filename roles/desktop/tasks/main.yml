@@ -17,8 +17,14 @@
     chdir: /usr/share/glib-2.0/schemas
     warn: no
 
-- name: make autologin groups
+- name: make autologin group
   group:
-    name: ['autologin', 'nopasswdlogin']
+    name: autologin
+    system: yes
+    state: present
+
+- name: make nopasswdlogin group
+  group:
+    name: nopasswdlogin
     system: yes
     state: present
