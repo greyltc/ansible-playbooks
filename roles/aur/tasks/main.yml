@@ -14,7 +14,6 @@
     name: aur_builder
     groups: wheel,aur
     system: yes
-    
 
 - name: give aur_builder install perms
   lineinfile:
@@ -31,14 +30,16 @@
     mode: 0775
 
 - name: set pkgdest
-  shell: sed -i "s,^#PKGDEST=.*,PKGDEST=/var/cache/makepkg/pkg,g" /etc/makepkg.conf
-  args:
-    warn: no
+  lineinfile:
+    path: /etc/makepkg.conf
+    regexp: '^#PKGDEST='
+    line: PKGDEST=/var/cache/makepkg/pkg
 
 - name: build zst
-  shell: sed -i "s,^PKGEXT=.*,PKGEXT='.pkg.tar.zst',g" /etc/makepkg.conf
-  args:
-    warn: no
+  lineinfile:
+    path: /etc/makepkg.conf
+    regexp: '^PKGEXT='
+    line: PKGEXT='.pkg.tar.zst'
 
 - name: Check if ansible aur module is installed
   command: pacman -Q ansible-aur-git
