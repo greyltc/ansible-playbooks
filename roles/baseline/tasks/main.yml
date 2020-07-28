@@ -1,0 +1,21 @@
+---
+- name: make tmp directory
+  file:
+    path: /tmp/ansible
+    state: directory
+    group: nobody
+    mode: 0777
+
+- name: Get the kernel version
+  command: "uname -r"
+  register: uname
+
+- name: full system upgrade
+  pacman:
+    update_cache: yes
+    upgrade: yes
+
+- name: install git and base devel group
+  pacman:
+    names: git,bash-completion,vi,vim,linux-firmware,repo,git-lfs,inetutils
+

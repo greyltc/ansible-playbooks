@@ -1,0 +1,40 @@
+---
+- name: install git and base devel group
+  pacman:
+    name: ['base-devel', 'git']
+
+- name: make aur group
+  group:
+    name: aur
+    system: yes
+    state: present
+
+- name: make aur_builder user
+  user:
+    name: aur_builder
+    groups: wheel,aur
+  lineinfile:
+    path: /etc/sudoers.d/11-install-aur_builder
+    line: 'aur_builder ALL=(ALL) NOPASSWD: /usr/bin/pacman'
+    create: yes
+    validate: 'visudo -cf %s'
+
+- name: make pkgdest
+  file:
+    path: /var/cache/makepkg/pkg
+    state: directory
+    group: aur
+    mode: 775
+
+- name: set pkgdest
+  lineinfile:
+    path: /etc/makepkg.conf
+    regexp: '^#PKGDEST='
+    line: PKGDEST=/var/cache/makepkg/pkg
+
+- name: build zst
+  lineinfile:
+    path: /etc/makepkg.conf
+    regexp: '^PKGEXT='
+    line: PKGEXT='.pkg.tar.zst'
+
