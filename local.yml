@@ -7,5 +7,7 @@
        name: baseline
     - import_role:
        name: aur
-#    - import_role:
-#       name: vagrant
+    - import_role:
+       name: vagrant
+    - import_role:
+       name: desktop

@@ -1,0 +1,22 @@
+---
+- name: make lauser
+  vars:
+    # created with:
+    # openssl passwd -salt saltysalt -1 the_password
+    hashed_pw: $1$saltysal$yHMhKxhp3YU8azihvlCHD1
+  user:
+    name: labuser
+    password: "{{ hashed_pw }}"
+    groups: wheel,uucp,video,users,vboxsf,audio,tty
+
+- name: Determine available groups
+  getent:
+    database: group
+
+- name: add labuser to aur group
+  user:
+    name: labuser
+    append: yes
+    groups: aur
+  when: aur in ansible_facts.getent_group
+

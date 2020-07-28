@@ -1,0 +1,24 @@
+---
+- name: install the desktop environment
+  pacman:
+    name: gdm gnome
+
+- name: prevent sleep at login screen
+  command: unset XDG_RUNTIME_DIR; dbus-launch gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type nothing
+
+- name: setvarious config defaults
+  shell: |
+    sed -i '/name="idle-activation-enabled"/,/<\/key>/{s|<default>true<\/default>|<default>false</default>|}' /usr/share/glib-2.0/schemas/org.gnome.desktop.screensaver.gschema.xml
+    sed -i '/name="lock-enabled"/,/<\/key>/{s|<default>true<\/default>|<default>false</default>|}' /usr/share/glib-2.0/schemas/org.gnome.desktop.screensaver.gschema.xml
+    sed -i '/name="idle-delay"/,/<\/key>/{s|<default>300<\/default>|<default>0</default>|}' /usr/share/glib-2.0/schemas/org.gnome.desktop.session.gschema.xml
+    sed -i '/name="sleep-inactive-ac-timeout"/,/<\/key>/{s|<default>1200<\/default>|<default>0</default>|}' /usr/share/glib-2.0/schemas/org.gnome.settings-daemon.plugins.power.gschema.xml
+    glib-compile-schemas .
+  args:
+    chdir: /usr/share/glib-2.0/schemas
+    warn: no
+
+- name: make autologin groups
+  group:
+    name: autologin nopasswdlogin
+    system: yes
+    state: present

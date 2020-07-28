@@ -1,5 +1,5 @@
 ---
-- name: install git and base devel group
+- name: install linux-firmware
   pacman:
     name: linux-firmware
 
@@ -7,21 +7,16 @@
   getent:
     database: group
 
-
-
-when: aur in ansible_facts.getent_group
-
-
-
-- name: make mutovis user
-  vars:
-    # created with:
-    # openssl passwd -salt saltysalt -1 the_password
-    hashed_pw: $1$saltysal$.QPThK.tBENRwBZL1fD5I1 
+- name: add vagrant to aur group
   user:
-    name: mutovis
-    password: "{{ hashed_pw }}"
-    system: yes
-    groups: ['uucp', 'gpib']
+    name: vagrant
+    append: yes
+    groups: aur
+  when: aur in ansible_facts.getent_group
 
-when: ansible in ansible_facts.getent_passwd
+- name: add vagrant to some other groups
+  user:
+    name: vagrant
+    append: yes
+    groups: video vboxsf users uucp tty
+
