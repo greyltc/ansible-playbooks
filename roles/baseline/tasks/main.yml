@@ -19,3 +19,11 @@
   pacman:
     name: git bash-completion vi vim repo git-lfs inetutils python
 
+- name: give wheel group sudo powers
+  lineinfile:
+    path: /etc/sudoers
+    state: present
+    regexp: '^# %wheel ALL=(ALL) ALL'
+    line: '%wheel ALL=(ALL) ALL'
+    validate: /usr/sbin/visudo -cf %s
+
