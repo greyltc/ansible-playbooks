@@ -1,7 +1,7 @@
 ---
 - name: install git and base devel group
   pacman:
-    names: base-devel,git
+    name: base-devel git
 
 - name: make aur group
   group:
@@ -27,14 +27,12 @@
     mode: 775
 
 - name: set pkgdest
-  lineinfile:
-    path: /etc/makepkg.conf
-    regexp: '^#PKGDEST='
-    line: PKGDEST=/var/cache/makepkg/pkg
+  shell: sed -i "s,^#PKGDEST=.*,PKGDEST=/var/cache/makepkg/pkg,g" /etc/makepkg.conf
+  args:
+    warn: no
 
 - name: build zst
-  lineinfile:
-    path: /etc/makepkg.conf
-    regexp: '^PKGEXT='
-    line: PKGEXT='.pkg.tar.zst'
+  shell: sed -i "s,^PKGEXT=.*,PKGEXT='.pkg.tar.zst',g" /etc/makepkg.conf
+  args:
+    warn: no
 
