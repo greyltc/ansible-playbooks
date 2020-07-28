@@ -13,7 +13,7 @@
     firstmatch: yes
     regexp: '<default>'
     line: "      <default>false</default>"
-   register: screensaver
+  register: screensaver
     
 - name: disable screen locking
   lineinfile:
