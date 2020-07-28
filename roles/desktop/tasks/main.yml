@@ -19,6 +19,6 @@
 
 - name: make autologin groups
   group:
-    name: autologin nopasswdlogin
+    name: autologin,nopasswdlogin
     system: yes
     state: present
