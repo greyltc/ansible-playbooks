@@ -15,7 +15,7 @@
     update_cache: yes
     upgrade: yes
 
-- name: install git and base devel group
+- name: ensure we have some high level deps
   pacman:
-    name: git,bash-completion,vi,vim,repo,git-lfs,inetutils
+    name: git bash-completion vi vim repo git-lfs inetutils python
 
