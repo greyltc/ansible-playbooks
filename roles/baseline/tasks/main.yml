@@ -27,7 +27,6 @@
 #    validate: /usr/sbin/visudo -cf %s
 
 - name: give wheel group sudo powers
-- name: get ready to build from AUR
   shell: |
     sed -i 's/^# %wheel ALL=(ALL) ALL/%wheel ALL=(ALL) ALL/g' /etc/sudoers
     /usr/sbin/visudo -cf /etc/sudoers
