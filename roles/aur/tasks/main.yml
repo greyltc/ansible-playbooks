@@ -1,7 +1,7 @@
 ---
-- name: install git and base devel group
+- name: install git and base devel group and go for yay
   pacman:
-    name: base-devel git
+    name: base-devel git go
 
 - name: make aur group
   group:
@@ -38,3 +38,27 @@
   args:
     warn: no
 
+- name: Check if ansible aur module is installed
+  command: pacman -Q ansible-aur-git
+  register: check_install
+  failed_when: no
+  changed_when: no
+
+- name: clone ansible-aur-git repo from the AUR
+  git:
+    repo: 'https://aur.archlinux.org/ansible-aur-git.git'
+    dest: /home/aur_builder/ansible-aur-git
+  when: check_install.rc != 0
+
+- name: build and install ansible AUR module
+  command: "makepkg -Cfi"
+  args:
+    chdir: /home/aur_builder/ansible-aur-git
+  become: yes
+  become_user: aur_builder
+  when: check_install.rc != 0
+  
+- name: ansible AUR module cleanup
+  file:
+    path: /home/aur_builder/ansible-aur-git
+    state: absent
