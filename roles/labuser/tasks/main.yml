@@ -12,11 +12,15 @@
 - name: Determine available groups
   getent:
     database: group
+    split: ':'
+
+- debug:
+    var: getent_group
 
 - name: add labuser to aur group
   user:
     name: labuser
     append: yes
     groups: aur
-  when: aur in ansible_facts.getent_group
+  when: aur in getent_group
 
