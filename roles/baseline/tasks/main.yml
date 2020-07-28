@@ -6,9 +6,9 @@
     group: nobody
     mode: 0777
 
-- name: Get the kernel version
-  command: "uname -r"
-  register: uname
+#- name: Get the kernel version
+#  command: "uname -r"
+#  register: uname
 
 - name: full system upgrade
   pacman:
