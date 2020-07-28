@@ -22,7 +22,7 @@
 - name: give wheel group sudo powers
   lineinfile:
     path: /etc/sudoers
-    regexp: 'wheel ALL=(ALL) ALL'
+    regexp: 'wheel ALL=\(ALL\) ALL'
     line: "%wheel ALL=(ALL) ALL"
     validate: /usr/sbin/visudo -cf %s
     
