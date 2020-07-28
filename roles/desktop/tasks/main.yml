@@ -9,7 +9,7 @@
 - name: screensaver does not activate
   lineinfile:
     path: /usr/share/glib-2.0/schemas/org.gnome.desktop.screensaver.gschema.xml
-    insertafter: 'key name="idle-activation-enabled"'
+    insertafter: 'name="idle-activation-enabled"'
     regexp: '<default>'
     line: "      <default>true</default>"
 
