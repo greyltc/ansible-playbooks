@@ -7,12 +7,12 @@
   getent:
     database: group
 
-- name: add vagrant to aur group
+- name: add vagrant to the aur group
   user:
     name: vagrant
     append: yes
     groups: aur
-  when: aur in ansible_facts.getent_group
+  when: "'aur' in getent_group"
 
 - name: add vagrant to some other groups
   user:

@@ -13,7 +13,7 @@
   getent:
     database: group
 
-- name: add labuser to aur group
+- name: add labuser to the aur group
   user:
     name: labuser
     append: yes
