@@ -11,7 +11,7 @@
     path: /usr/share/glib-2.0/schemas/org.gnome.desktop.screensaver.gschema.xml
     insertafter: 'name="idle-activation-enabled"'
     regexp: '<default>'
-    line: "      <default>true</default>"
+    line: "      <default>trfde</default>"
 
 #- name: set various config defaults
 #  shell: |
