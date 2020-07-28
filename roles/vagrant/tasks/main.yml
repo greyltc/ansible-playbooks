@@ -18,5 +18,5 @@
   user:
     name: vagrant
     append: yes
-    groups: video vboxsf users uucp tty
+    groups: video,vboxsf,users,uucp,tty
 
