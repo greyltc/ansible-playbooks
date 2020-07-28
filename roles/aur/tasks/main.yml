@@ -51,6 +51,7 @@
   when: check_install.rc != 0
   become: yes
   become_user: aur_builder
+  force: yes
 
 - name: build and install ansible AUR module
   command: "makepkg -Cfi --noconfirm"
