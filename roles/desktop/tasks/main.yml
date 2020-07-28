@@ -13,6 +13,7 @@
     firstmatch: yes
     regexp: '<default>'
     line: "      <default>false</default>"
+   refister: screensaver
     
 - name: disable screen locking
   lineinfile:
@@ -21,6 +22,7 @@
     firstmatch: yes
     regexp: '<default>'
     line: "      <default>false</default>"
+  register: screenlocker
 
 - name: disable screen idling
   lineinfile:
@@ -29,6 +31,7 @@
     firstmatch: yes
     regexp: '<default>'
     line: "      <default>0</default>"
+  register: screenidle
 
 - name: disable machine sleeping
   lineinfile:
@@ -37,11 +40,13 @@
     firstmatch: yes
     regexp: '<default>'
     line: "      <default>0</default>"
+  register: sleep
 
 - name: compile schemas
   command: glib-compile-schemas .
   args:
     chdir: /usr/share/glib-2.0/schemas
+  when: screensaver.changed or screenlocker.changed or screenidle.changed or sleep.changed
 
 - name: make autologin group
   group:
