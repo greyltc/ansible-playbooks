@@ -17,5 +17,5 @@
 
 - name: install git and base devel group
   pacman:
-    names: git,bash-completion,vi,vim,linux-firmware,repo,git-lfs,inetutils
+    name: git,bash-completion,vi,vim,linux-firmware,repo,git-lfs,inetutils
 
