@@ -6,12 +6,12 @@
 - name: prevent sleep at login screen
   shell: unset XDG_RUNTIME_DIR; dbus-launch gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type nothing
 
-- name: no screensaver default
+- name: screensaver does not activate
   lineinfile:
     path: /usr/share/glib-2.0/schemas/org.gnome.desktop.screensaver.gschema.xml
     insertafter: 'key name="idle-activation-enabled"'
     regexp: '<default>'
-    line: "      <default>false</default>"
+    line: "      <default>true</default>"
 
 #- name: set various config defaults
 #  shell: |
