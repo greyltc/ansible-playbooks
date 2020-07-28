@@ -53,7 +53,7 @@
   become_user: aur_builder
 
 - name: build and install ansible AUR module
-  command: "makepkg -Cfi"
+  command: "makepkg -Cfi --noconfirm"
   args:
     chdir: /home/aur_builder/ansible-aur-git
   become: yes
