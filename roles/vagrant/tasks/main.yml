@@ -14,9 +14,10 @@
     groups: aur
   when: "'aur' in getent_group"
 
-- name: add vagrant to some other groups
+- name: add vagrant to some other groups nad make sure system user
   user:
     name: vagrant
     append: yes
     groups: video,vboxsf,users,uucp,tty
+    system: yes
 

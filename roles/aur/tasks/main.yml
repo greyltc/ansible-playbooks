@@ -13,6 +13,8 @@
   user:
     name: aur_builder
     groups: wheel,aur
+    system: yes
+    
 
 - name: give aur_builder install perms
   lineinfile:
