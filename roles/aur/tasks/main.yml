@@ -49,6 +49,8 @@
     repo: 'https://aur.archlinux.org/ansible-aur-git.git'
     dest: /home/aur_builder/ansible-aur-git
   when: check_install.rc != 0
+  become: yes
+  become_user: aur_builder
 
 - name: build and install ansible AUR module
   command: "makepkg -Cfi"
