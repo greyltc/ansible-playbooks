@@ -25,7 +25,7 @@
     name: vagrant
     append: yes
     groups: aur
-  when: 'aur' in getent_group and 'vagrant' in getent_passwd
+  when: ("'aur' in getent_group") and ("'vagrant' in getent_passwd")
 
 - name: add vagrant to some other groups and make sure system user
   user:
