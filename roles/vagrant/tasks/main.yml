@@ -33,5 +33,5 @@
     append: yes
     groups: video,vboxsf,users,uucp,tty
     system: yes
-  when: "'vagrant' in getent_passwd" and ( virtualbox-guest-utils-nox_installed.rc == 0 or virtualbox-guest-utils_installed.rc == 0 )
+  when: ( virtualbox-guest-utils-nox_installed.rc == 0 or virtualbox-guest-utils_installed.rc == 0 ) and "'vagrant' in getent_passwd"
 
