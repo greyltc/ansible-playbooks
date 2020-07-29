@@ -46,7 +46,7 @@
   
 - name: 5 second autologin timeout for labuser
   lineinfile:
-    insertafter: '^[daemon]'
+    insertafter: '^\[daemon\]'
     firstmatch: yes
     line: 'TimedLogin=labuser\nTimedLoginEnable=True\nTimedLoginDelay=5'
     path: /etc/gdm/custom.conf
