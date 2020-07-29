@@ -1,5 +1,5 @@
 ---
-- name: make lauser
+- name: make labuser
   vars:
     # created with:
     # openssl passwd -salt saltysalt -1 the_password
@@ -47,6 +47,7 @@
 - name: 5 second autologin timeout for labuser
   lineinfile:
     insertafter: '^[daemon]'
-    line: TimedLogin=labuser\nTimedLoginEnable=True\nTimedLoginDelay=5
+    firstmatch: yes
+    line: 'TimedLogin=labuser\nTimedLoginEnable=True\nTimedLoginDelay=5'
     path: /etc/gdm/custom.conf
   when: ("/etc/gdm/custom.conf" is file)
