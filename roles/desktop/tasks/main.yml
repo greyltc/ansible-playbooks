@@ -1,7 +1,20 @@
 ---
+- name: Check if gdm is installed
+  command: pacman -Q gdm
+  register: gdm_installed
+  failed_when: no
+  changed_when: no
+
+- name: Check if gnome is installed
+  command: pacman -Q gdm
+  register: gnome_installed
+  failed_when: no
+  changed_when: no
+
 - name: install the desktop environment
   pacman:
     name: gdm gnome
+  when: gdm_installed.rc != 0 and gnome_installed.rc != 0
 
 - name: prevent sleep at login screen
   shell: unset XDG_RUNTIME_DIR; dbus-launch gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type nothing
