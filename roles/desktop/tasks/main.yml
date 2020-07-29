@@ -71,12 +71,12 @@
   changed_when: no
 
 - name: vagrant user not on login page
-  blockinfile:
-    path: /var/lib/AccountsService/users/vagrant
+  copy:
+    dest: /var/lib/AccountsService/users/vagrant
+    group: root
+    owner: root
     mode: 600
-    marker: ""
-    create: yes
-    block: |
+    content: |
       [User]
       XSession=gnome
       SystemAccount=true
