@@ -25,7 +25,7 @@
     name: vagrant
     append: yes
     groups: aur
-  when: "/vagrant" is directory and "'aur' in getent_group"
+  when: ("/vagrant" is directory) and "'aur' in getent_group"
 
 - name: add vagrant to some other groups and make sure system user
   user:
