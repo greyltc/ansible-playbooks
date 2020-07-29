@@ -108,22 +108,22 @@
     enabled: yes
     masked: no
 
-- name: enable NetworkManager service
-  systemd:
-    name: NetworkManager
-    enabled: yes
-    masked: no
+#- name: enable NetworkManager service
+#  systemd:
+#    name: NetworkManager
+#    enabled: yes
+#    masked: no
 
-- name: NetworkManager ignores vagrant's device
-  copy:
-    dest: /etc/NetworkManager/conf.d/unmanaged.conf
-    content: |
-      [keyfile]
-      unmanaged-devices=interface-name:eth0
-  when: ("/vagrant" is directory)
+#- name: NetworkManager ignores vagrant's device
+#  copy:
+#    dest: /etc/NetworkManager/conf.d/unmanaged.conf
+#    content: |
+#      [keyfile]
+#      unmanaged-devices=interface-name:eth0
+#  when: ("/vagrant" is directory)
 
-- name: NetworkManager owns eth1
-  file:
-    state: absent
-    path: /etc/systemd/network/eth1.network
-  when: ("/vagrant" is directory)
+#- name: NetworkManager owns eth1
+#  file:
+#    state: absent
+#    path: /etc/systemd/network/eth1.network
+#  when: ("/vagrant" is directory)
