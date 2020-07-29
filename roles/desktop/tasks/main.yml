@@ -60,6 +60,12 @@
     system: yes
     state: present
 
+- name: enable pam gdm to validate nopasswdlogin group
+  lineinfile:
+    path: /etc/pam.d/gdm-password
+    line: auth sufficient pam_succeed_if.so user ingroup nopasswdlogin
+    insertbefore: BOF
+
 - name: Determine available users
   getent:
     database: passwd
