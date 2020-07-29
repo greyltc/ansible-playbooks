@@ -59,3 +59,26 @@
     name: nopasswdlogin
     system: yes
     state: present
+
+- name: Determine available users
+  getent:
+    database: passwd
+  
+- name: Check if accountsservice is installed
+  command: pacman -Q accountsservice
+  register: accountsservice_installed
+  failed_when: no
+  changed_when: no
+
+- name: vagrant user not on login page
+  blockinfile:
+    path: /var/lib/AccountsService/users/vagrant
+    mode: 600
+    create: yes
+    block: |
+      [User]
+      XSession=gnome
+      SystemAccount=true
+  # only when the vagrant user exists and accountsservice is here
+  when: "'vagrant' in getent_passwd" and accountsservice_installed.rc == 0
+
