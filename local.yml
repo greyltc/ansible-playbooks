@@ -11,5 +11,7 @@
        name: vagrant
     - import_role:
        name: desktop
+    - import_role:
+       name: labuser
 #    - import_role:
 #       name: reboot

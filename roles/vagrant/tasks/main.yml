@@ -1,7 +1,20 @@
 ---
+- name: Check if virtualbox-guest-utils is installed
+  command: pacman -Q virtualbox-guest-utils
+  register: virtualbox-guest-utils_installed
+  failed_when: no
+  changed_when: no
+
+- name: Check if virtualbox-guest-utils-nox is installed
+  command: pacman -Q virtualbox-guest-utils
+  register: virtualbox-guest-utils-nox_installed
+  failed_when: no
+  changed_when: no
+
 - name: install linux-firmware
   pacman:
     name: linux-firmware
+  when: virtualbox-guest-utils-nox.rc == 0 or virtualbox-guest-utils.rc == 0
 
 - name: Determine available groups
   getent:
@@ -12,12 +25,13 @@
     name: vagrant
     append: yes
     groups: aur
-  when: "'aur' in getent_group"
+  when: "'aur' in getent_group" and "'vagrant' in getent_passwd"
 
-- name: add vagrant to some other groups nad make sure system user
+- name: add vagrant to some other groups and make sure system user
   user:
     name: vagrant
     append: yes
     groups: video,vboxsf,users,uucp,tty
     system: yes
+  when: "'vagrant' in getent_passwd" and ( virtualbox-guest-utils-nox_installed.rc == 0 or virtualbox-guest-utils_installed.rc == 0 )
 

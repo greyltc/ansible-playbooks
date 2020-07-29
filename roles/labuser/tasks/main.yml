@@ -7,11 +7,15 @@
   user:
     name: labuser
     password: "{{ hashed_pw }}"
-    groups: wheel,uucp,video,users,vboxsf,audio,tty
+    groups: wheel,uucp,video,users,audio,tty
 
 - name: Determine available groups
   getent:
     database: group
+
+- name: Determine available users
+  getent:
+    database: passwd
 
 - name: add labuser to the aur group
   user:
@@ -20,3 +24,29 @@
     groups: aur
   when: "'aur' in getent_group"
 
+- name: add labuser to vbox group
+  user:
+    name: labuser
+    append: yes
+    groups: vboxsf
+  when: virtualbox-guest-utils-nox_installed.rc == 0 or virtualbox-guest-utils_installed.rc == 0
+
+- name: Check if gdm is installed
+  command: pacman -Q gdm
+  register: gdm_installed
+  failed_when: no
+  changed_when: no
+
+- name: add labuser to autologin groups
+  user:
+    name: labuser
+    append: yes
+    groups: nopasswdlogin,autologin
+  when: gdm_installed.rc == 0
+  
+- name: 5 second autologin timeout for labuser
+  lineinfile:
+    insertafter: '^[daemon]'
+    line: TimedLogin=labuser\nTimedLoginEnable=True\nTimedLoginDelay=5
+    path: /etc/gdm/custom.conf
+  when: /etc/gdm/custom.conf is file
