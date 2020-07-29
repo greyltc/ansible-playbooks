@@ -69,10 +69,3 @@
     path: /home/aur_builder/ansible-aur-git
     state: absent
 
-- name: install yay
-  aur: name=yay use=makepkg state=present
-  become: yes
-  become_user: aur_builder
-
-- name: upgrade aur packages
-  aur: upgrade=yes use=yay aur_only=yes
