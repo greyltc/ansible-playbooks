@@ -79,5 +79,6 @@
       [User]
       XSession=gnome
       SystemAccount=true
-  when: "'vagrant' in getent_passwd" and accountsservice_installed.rc == 0   # only when the vagrant user exists and accountsservice is here
+  when: accountsservice_installed.rc == 0 and "'vagrant' in getent_passwd"
+  # only when the vagrant user exists and accountsservice is here
 
