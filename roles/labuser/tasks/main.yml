@@ -29,7 +29,7 @@
     name: labuser
     append: yes
     groups: vboxsf
-  when: virtualbox-guest-utils-nox_installed.rc == 0 or virtualbox-guest-utils_installed.rc == 0
+  when: virtualbox_guest_utils_nox_installed.rc == 0 or virtualbox_guest_utils_installed.rc == 0
 
 - name: Check if gdm is installed
   command: pacman -Q gdm
