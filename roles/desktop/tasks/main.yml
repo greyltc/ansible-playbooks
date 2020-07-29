@@ -74,6 +74,7 @@
   blockinfile:
     path: /var/lib/AccountsService/users/vagrant
     mode: 600
+    marker: ""
     create: yes
     block: |
       [User]
