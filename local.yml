@@ -8,8 +8,8 @@
     - import_role:
        name: aur
     - import_role:
-       name: aur-phase2
-    - import_role:
        name: vagrant
     - import_role:
        name: desktop
+#    - import_role:
+#       name: reboot
