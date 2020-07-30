@@ -5,13 +5,13 @@
 
 - name: enable mosquitto persistance
   lineinfile:
-    path: etc/mosquitto/mosquitto.conf
+    path: /etc/mosquitto/mosquitto.conf
     regexp: '^#persistence false'
     line: "persistence true"
 
 - name: set mosquitto persistance locaion
   lineinfile:
-    path: etc/mosquitto/mosquitto.conf
+    path: /etc/mosquitto/mosquitto.conf
     regexp: '^#persistence_location'
     line: "persistence_location /var/lib/mosquitto/"
 
