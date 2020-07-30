@@ -35,7 +35,7 @@
     insertbefore: '<summary>Allow embedding a keyboard into the window'
     #regexp: 'default'
     line: "      <default>false5555555555</default>"
-  register: screensaver
+  register: screensaver2
     
 - name: disable screen locking
   lineinfile:
