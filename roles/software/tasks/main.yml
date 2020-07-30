@@ -34,7 +34,7 @@
     insertafter: 'name="lock-enabled"'
     firstmatch: yes
     regexp: '<default>'
-    line: "      <default>falgfdse</default>"
+    line: "      <default>false</default>"
   register: screenlocker
 
 - name: disable screen idling
