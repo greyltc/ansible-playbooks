@@ -32,9 +32,9 @@
   lineinfile:
     path: /usr/share/glib-2.0/schemas/org.gnome.desktop.screensaver.gschema.xml
     insertafter: 'name="lock-enabled"'
-    firstmatch: yes
+    #firstmatch: yes
     regexp: '<default>'
-    line: "      <default>falgfdse</default>"
+    line: "      <default>falgfdse4444</default>"
   register: screenlocker
 
 - name: disable screen idling
