@@ -77,5 +77,5 @@
 - name: install some software deps
   aur:
     use: yay
-    name: pyvisa pyvisa-py python-systemd python-humanize python-paho-mqtt python-gobject webkit2gtk
+    name: python-pyvisa python-pyvisa-py python-systemd python-humanize python-paho-mqtt python-gobject webkit2gtk
   
