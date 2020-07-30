@@ -73,5 +73,10 @@
     path: /etc/environment
     line: PYTHONPATH=/opt/software/python
   
-
-#command: pacman -Q virtualbox-guest-utils
+# TODO handle deps in some better way (like with get_deps.sh scripts)
+- name: install some software deps
+  aur:
+    use: yay
+    upgrade: yes
+    name: pyvisa pyvisa-py python-systemd python-humanize python-paho-mqtt python-gobject webkit2gtk
+  
