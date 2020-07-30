@@ -22,11 +22,12 @@
   become_user: gdm
 
 - name: screensaver does not activate
-  lineinfile:
+  replace:
     path: /usr/share/glib-2.0/schemas/org.gnome.desktop.screensaver.gschema.xml
-    insertbefore: '<summary>Activate when idle'
-    #regexp: '<default\>'
-    line: "      <default>falsffffffffffffffffffffffffffffffffffffffe</default>"
+    after: 'name="idle-activation-enabled"'
+    regexp: 'true'
+    replace: 'false'
+    before: '<summary>Activate when idle'
   register: screensaver
 
 #- name: test
