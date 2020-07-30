@@ -67,6 +67,11 @@
   command: repo sync
   args:
     chdir: /opt/software
+
+- name: set PYTHONPATH
+  lineinfile:
+    path: /etc/environment
+    line: PYTHONPATH=/opt/software/python
   
 
 #command: pacman -Q virtualbox-guest-utils
