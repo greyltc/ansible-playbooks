@@ -59,6 +59,14 @@
   command: repo init -u https://github.com/greyltc/manifest.git # -b otter
   args:
     chdir: /opt/software
+ when: ("/opt/software/.repo" is not directory)
+
+- name: sync repo
+  become: yes
+  become_user: labuser
+  command: repo sync
+  args:
+    chdir: /opt/software
   
 
 #command: pacman -Q virtualbox-guest-utils
