@@ -24,7 +24,15 @@
 - name: screensaver does not activate
   lineinfile:
     path: /usr/share/glib-2.0/schemas/org.gnome.desktop.screensaver.gschema.xml
-    insertbefore: 'Activate when idle'
+    insertbefore: '<summary>Activate when idle'
+    #regexp: 'default'
+    line: "      <default>false5555555555</default>"
+  register: screensaver
+
+- name: test
+  lineinfile:
+    path: /usr/share/glib-2.0/schemas/org.gnome.desktop.screensaver.gschema.xml
+    insertbefore: '<summary>Allow embedding a keyboard into the window'
     #regexp: 'default'
     line: "      <default>false5555555555</default>"
   register: screensaver
