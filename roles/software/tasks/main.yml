@@ -59,7 +59,7 @@
   command: repo init -u https://github.com/greyltc/manifest.git # -b otter
   args:
     chdir: /opt/software
- when: ("/opt/software/.repo" is not directory)
+ when: not ("/opt/software/.repo" is directory)
 
 - name: sync repo
   become: yes
