@@ -13,7 +13,7 @@
        name: desktop
     - import_role:
        name: labuser
-    - import_role:
-       name: software
+#    - import_role:
+#       name: software
 #    - import_role:
 #       name: reboot
