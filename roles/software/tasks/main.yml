@@ -87,3 +87,18 @@
   become: yes
   become_user: aur_builder
 
+- name: link in the config file
+  file:
+    state: link
+    src: /vagrant/measurement_config.ini
+    path: ~/measurement_config.ini
+  become: yes
+  become_user: labuser
+
+- name: link in the data folder
+  file:
+    state: link
+    src: /vagrant/data
+    path: ~/data
+  become: yes
+  become_user: labuser
