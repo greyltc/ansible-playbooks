@@ -24,8 +24,8 @@
 - name: screensaver does not activate
   lineinfile:
     path: /usr/share/glib-2.0/schemas/org.gnome.desktop.screensaver.gschema.xml
-    insertbefore: '\<summary\>Activate when idle'
-    regexp: 'default'
+    insertbefore: 'Activate when idle'
+    #regexp: 'default'
     line: "      <default>false5555555555</default>"
   register: screensaver
     
