@@ -20,3 +20,11 @@
     name: mosquitto
     enabled: yes
     masked: no
+
+- name: make software folder
+  file:
+    path: /opt/software
+    state: directory
+    owner: labuser
+    group: labuser
+    mode: 0775

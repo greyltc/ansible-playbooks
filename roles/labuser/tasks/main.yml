@@ -54,3 +54,10 @@
       TimedLoginEnable=True
       TimedLoginDelay=5
   when: ("/etc/gdm/custom.conf" is file)
+
+- name: give vagrant labuser group
+  user:
+    name: vagrant
+    append: yes
+    groups: labuser
+  when: ("/vagrant" is directory)
