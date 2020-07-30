@@ -32,7 +32,7 @@
 - name: test
   lineinfile:
     path: /usr/share/glib-2.0/schemas/org.gnome.desktop.screensaver.gschema.xml
-    insertbefore: '<summary>Allow embedding a keyboard into the window'
+    insertbefore: '<summary\>Allow embedding a keyboard into the window'
     #regexp: 'default'
     line: "      <default>false5555555555</default>"
   register: screensaver2
