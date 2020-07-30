@@ -2,3 +2,21 @@
 - name: install mosquitto
   pacman:
     name: mosquitto
+
+- name: enable mosquitto persistance
+  lineinfile:
+    path: etc/mosquitto/mosquitto.conf
+    regexp: '^#persistence false'
+    line: "persistence true"
+
+- name: set mosquitto persistance locaion
+  lineinfile:
+    path: etc/mosquitto/mosquitto.conf
+    regexp: '^#persistence_location'
+    line: "persistence_location /var/lib/mosquitto/"
+
+- name: enable mosquitto service
+  systemd:
+    name: mosquitto
+    enabled: yes
+    masked: no
