@@ -72,11 +72,18 @@
   lineinfile:
     path: /etc/environment
     line: PYTHONPATH=/opt/software/python
-  
+
 # TODO handle deps in some better way (like with get_deps.sh scripts)
-- name: install some software deps
+- name: install some deps
+  pacman:
+    name:  python-systemd python-humanize python-paho-mqtt python-gobject webkit2gtk
+
+- name: install some aur deps
   aur:
     use: yay
-    name: python-pyvisa python-pyvisa-py python-systemd python-humanize python-paho-mqtt python-gobject webkit2gtk
+    name: 
+      - python-pyvisa
+      - python-pyvisa-py
   become: yes
   become_user: aur_builder
+
