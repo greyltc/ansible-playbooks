@@ -28,3 +28,27 @@
     owner: labuser
     group: labuser
     mode: 0775
+
+- name: git config name
+  become: yes
+  become_user: labuser
+  git_config:
+    scope: global
+    name: user.name
+    value: "Lab User"
+
+- name: git config email
+  become: yes
+  become_user: labuser
+  git_config:
+    scope: global
+    name: user.email
+    value: "labuser@measurebox.local"
+
+- name: git config color
+  become: yes
+  become_user: labuser
+  git_config:
+    scope: global
+    name: color.ui
+    value: "true"
