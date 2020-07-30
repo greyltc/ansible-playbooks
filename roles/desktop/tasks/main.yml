@@ -16,10 +16,10 @@
     name: gdm gnome
   when: gdm_installed.rc != 0 or gnome_installed.rc != 0
 
-- name: prevent sleep at login screen
-  shell: unset XDG_RUNTIME_DIR; dbus-launch gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type nothing
-  become: yes
-  become_user: gdm
+#- name: prevent sleep at login screen
+#  shell: unset XDG_RUNTIME_DIR; dbus-launch gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type nothing
+#  become: yes
+#  become_user: gdm
 
 - name: screensaver does not activate
   lineinfile:
