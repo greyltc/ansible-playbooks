@@ -126,3 +126,35 @@
     masked: no
   become: yes
   become_user: labuser
+
+- name: make autostart folder
+  file:
+    state: directory
+    path: ~/.config/autostart
+  become: yes
+  become_user: labuser
+
+- name: link in launcher autostart
+  file:
+    state: link
+    src: /opt/software/source/control-ui/Control.desktop
+    path: ~/.config/autostart/Control.desktop
+  become: yes
+  become_user: labuser
+
+- name: make apps folder
+  file:
+    state: directory
+    path: ~/.local/share/applications
+  become: yes
+  become_user: labuser
+
+- name: link in launcher
+  file:
+    state: link
+    src: /opt/software/source/control-ui/Control.desktop
+    path: ~/.local/share/applications/Control.desktop
+  become: yes
+  become_user: labuser
+
+#TODO: make favorite
