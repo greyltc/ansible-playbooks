@@ -1,2 +1,2 @@
-#- name: Unconditionally reboot the machine with all defaults
-#  reboot:
+- name: Reboot
+  reboot:
