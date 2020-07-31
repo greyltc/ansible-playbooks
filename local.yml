@@ -8,7 +8,7 @@
       tags: provision
     - import_role:
       name: aur
-    tags: provision
+      tags: provision
     - import_role:
       name: vagrant
       tags: provision
