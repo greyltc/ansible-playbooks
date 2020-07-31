@@ -3,8 +3,8 @@
   hosts: localhost
   become: yes
   tasks:
-    import_role:
-      name: baseline
+    - import_role:
+       name: baseline
 #        tags: [ web, foo ]
 #    - import_role:
 #      name: baseline
