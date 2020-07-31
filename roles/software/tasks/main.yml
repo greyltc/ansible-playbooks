@@ -102,3 +102,27 @@
     path: ~/data
   become: yes
   become_user: labuser
+
+- name: make service folder
+  file:
+    state: directory
+    path: ~/.config/systemd/user
+  become: yes
+  become_user: labuser
+
+- name: link in service
+  file:
+    state: link
+    src: /opt/software/python/central-control/config/utility_handler.service
+    path: ~/.config/systemd/user/utility_handler.service
+  become: yes
+  become_user: labuser
+
+- name: enable mosquitto service
+  systemd:
+    scope: user
+    name: utility_handler
+    enabled: yes
+    masked: no
+  become: yes
+  become_user: labuser
