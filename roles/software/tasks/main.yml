@@ -115,18 +115,19 @@
   file:
     state: link
     src: /opt/software/source/central-control/config/utility-handler.service
-    path: ~/.config/systemd/user/utility_handler.service
+    path: ~/.config/systemd/user/utility-handler.service
   become: yes
   become_user: labuser
 
-- name: enable utility_handler service
-  systemd:
-    scope: user
-    name: utility_handler.service
-    enabled: yes
-    masked: no
-  become: yes
-  become_user: labuser
+# TODO figure out another way to do this
+#- name: enable utility_handler service
+#  systemd:
+#    scope: user
+#    name: utility-handler
+#    enabled: yes
+#    masked: no
+#  become: yes
+#  become_user: labuser
 
 - name: make autostart folder
   file:
