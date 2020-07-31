@@ -118,7 +118,7 @@
   become: yes
   become_user: labuser
 
-- name: enable mosquitto service
+- name: enable utility_handler service
   systemd:
     scope: user
     name: utility_handler
