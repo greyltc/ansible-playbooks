@@ -104,12 +104,12 @@
   become: yes
   become_user: labuser
 
-- name: make service folder
-  file:
-    state: directory
-    path: ~/.config/systemd/user
-  become: yes
-  become_user: labuser
+#- name: make service folder
+#  file:
+#    state: directory
+#    path: ~/.config/systemd/user
+#  become: yes
+#  become_user: labuser
 
 - name: link in service
   file:
@@ -119,22 +119,27 @@
   become: yes
   become_user: labuser
 
-# TODO figure out another way to do this
-#- name: enable utility_handler service
-#  systemd:
-#    scope: user
-#    name: utility-handler
-#    enabled: yes
-#    masked: no
+#- name: make enable service user folder
+#  file:
+#    state: directory
+#    path: ~/.config/systemd/user
 #  become: yes
 #  become_user: labuser
 
-- name: make autostart folder
+- name: link in enabled service
   file:
-    state: directory
-    path: ~/.config/autostart
+    state: link
+    src: /opt/software/source/central-control/config/utility-handler.service
+    path: ~/.config/systemd/user/default.target.wants/utility-handler.service
   become: yes
   become_user: labuser
+
+#- name: make autostart folder
+#  file:
+#    state: directory
+#    path: ~/.config/autostart
+#  become: yes
+#  become_user: labuser
 
 - name: link in launcher autostart
   file:
@@ -144,12 +149,12 @@
   become: yes
   become_user: labuser
 
-- name: make apps folder
-  file:
-    state: directory
-    path: ~/.local/share/applications
-  become: yes
-  become_user: labuser
+#- name: make apps folder
+#  file:
+#    state: directory
+#    path: ~/.local/share/applications
+#  become: yes
+#  become_user: labuser
 
 - name: link in launcher
   file:
