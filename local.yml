@@ -3,27 +3,27 @@
   hosts: localhost
   become: yes
   tasks:
+#    - import_role:
+#       name: baseline
+#      tags: web
     - import_role:
        name: baseline
-      tags: web
-#    - import_role:
-#      name: baseline
-#      tags: provision
-#    - import_role:
-#      name: aur
-#      tags: provision
-#    - import_role:
-#      name: vagrant
-#      tags: provision
-#    - import_role:
-#      name: desktop
-#      tags: provision
-#    - import_role:
-#      name: labuser
-#      tags: software
-#    - import_role:
-#      name: software
-#      tags: software
-#    - import_role:
-#      name: reboot
-#      tags: [ never, reboot ]
+      tags: provision
+    - import_role:
+       name: aur
+      tags: provision
+    - import_role:
+       name: vagrant
+      tags: provision
+    - import_role:
+       name: desktop
+      tags: provision
+    - import_role:
+       name: labuser
+      tags: software
+    - import_role:
+       name: software
+      tags: software
+    - import_role:
+       name: reboot
+      tags: [ never, reboot ]
