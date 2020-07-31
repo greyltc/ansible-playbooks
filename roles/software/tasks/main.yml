@@ -91,6 +91,7 @@
 - name: link in the config file
   file:
     state: link
+    force: yes
     src: /vagrant/measurement_config.ini
     path: ~/measurement_config.ini
   become: yes
@@ -114,6 +115,7 @@
 - name: link in service
   file:
     state: link
+    force: yes
     src: /opt/software/source/central-control/config/utility-handler.service
     path: ~/.config/systemd/user/utility-handler.service
   become: yes
@@ -129,6 +131,7 @@
 - name: link in enabled service
   file:
     state: link
+    force: yes
     src: /opt/software/source/central-control/config/utility-handler.service
     path: ~/.config/systemd/user/default.target.wants/utility-handler.service
   become: yes
@@ -144,6 +147,7 @@
 - name: link in launcher autostart
   file:
     state: link
+    force: yes
     src: /opt/software/source/control-ui/Control.desktop
     path: ~/.config/autostart/Control.desktop
   become: yes
@@ -159,6 +163,7 @@
 - name: link in launcher
   file:
     state: link
+    force: yes
     src: /opt/software/source/control-ui/Control.desktop
     path: ~/.local/share/applications/Control.desktop
   become: yes
