@@ -121,7 +121,7 @@
 - name: enable utility_handler service
   systemd:
     scope: user
-    name: utility_handler
+    name: utility-handler
     enabled: yes
     masked: no
   become: yes
