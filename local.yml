@@ -11,16 +11,16 @@
     tags: provision
     - import_role:
       name: vagrant
-    tags: provision
+      tags: provision
     - import_role:
       name: desktop
-    tags: provision
+      tags: provision
     - import_role:
       name: labuser
-    tags: software
+      tags: software
     - import_role:
       name: software
-    tags: software
+      tags: software
     - import_role:
       name: reboot
-    tags: [ never, reboot ]
+      tags: [ never, reboot ]
