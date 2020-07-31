@@ -24,6 +24,18 @@
     groups: aur
   when: "'aur' in getent_group"
 
+- name: Check if virtualbox-guest-utils is installed
+  command: pacman -Q virtualbox-guest-utils
+  register: virtualbox_guest_utils_installed
+  failed_when: no
+  changed_when: no
+
+- name: Check if virtualbox-guest-utils-nox is installed
+  command: pacman -Q virtualbox-guest-utils
+  register: virtualbox_guest_utils_nox_installed
+  failed_when: no
+  changed_when: no
+
 - name: add labuser to vbox group
   user:
     name: labuser
