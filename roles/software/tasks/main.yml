@@ -113,7 +113,7 @@
 - name: link in service
   file:
     state: link
-    src: /opt/software/python/central-control/config/utility_handler.service
+    src: /opt/software/source/central-control/config/utility_handler.service
     path: ~/.config/systemd/user/utility_handler.service
   become: yes
   become_user: labuser
