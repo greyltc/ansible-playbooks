@@ -5,7 +5,7 @@
   tasks:
     - import_role:
        name: baseline
-        tags: [ web, foo ]
+        tags: web
 #    - import_role:
 #      name: baseline
 #      tags: provision
