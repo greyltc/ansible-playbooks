@@ -3,9 +3,6 @@
   hosts: localhost
   become: yes
   tasks:
-#    - import_role:
-#       name: baseline
-#      tags: web
     - import_role:
        name: baseline
       tags: provision
