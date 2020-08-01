@@ -68,7 +68,7 @@
     path: /etc/environment
     line: PYTHONPATH=/opt/software/python
 
-# TODO handle deps in some better way (like with get_deps.sh scripts)
+# TODO handle our deps in some better way (like with get_deps.sh scripts)
 - name: install some deps
   pacman:
     name:  python-systemd python-humanize python-paho-mqtt python-gobject webkit2gtk python-setuptools-scm python-pyserial python-numpy python-scipy python-mpmath
@@ -80,8 +80,8 @@
       - python-pyvisa
       - python-pyvisa-py
       - python-setuptools-scm-git-archive
-      - python-plotly
-      - python-dash
-      - python-dash-daq
+#      - python-plotly
+#      - python-dash
+#      - python-dash-daq
   become: yes
   become_user: aur_builder
