@@ -16,7 +16,7 @@
   user:
     name: "{{ user_name }}"
     password: "{{ hashed_pw }}"
-  when: getent_passwd[user_name] == none
+  when: user_name not in getent_passwd
 
 - name: setup groups
   user:
