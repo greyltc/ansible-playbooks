@@ -107,32 +107,34 @@
   become_user: labuser
   when: not ("/home/labuser/data" is exists)
 
-- name: make service folder
+- name: make user service folder
   file:
     state: directory
     path: ~/.config/systemd/user
   become: yes
   become_user: labuser
 
-- name: link in service
+- name: link user in service
   file:
     state: link
+    follow: no
     force: yes
     src: /opt/software/source/central-control/config/utility-handler.service
     path: ~/.config/systemd/user/utility-handler.service
   become: yes
   become_user: labuser
 
-- name: make enable service user folder
+- name: make user enable service user folder
   file:
     state: directory
     path: ~/.config/systemd/user/default.target.wants
   become: yes
   become_user: labuser
 
-- name: link in enabled service
+- name: link in enabled user service
   file:
     state: link
+    follow: no
     force: yes
     src: /opt/software/source/central-control/config/utility-handler.service
     path: ~/.config/systemd/user/default.target.wants/utility-handler.service
@@ -149,6 +151,7 @@
 - name: link in launcher autostart
   file:
     state: link
+    follow: no
     force: yes
     src: /opt/software/source/control-ui/Control.desktop
     path: ~/.config/autostart/Control.desktop
@@ -165,6 +168,7 @@
 - name: link in launcher
   file:
     state: link
+    follow: no
     force: yes
     src: /opt/software/source/control-ui/Control.desktop
     path: ~/.local/share/applications/Control.desktop
