@@ -97,7 +97,7 @@
     path: ~/data
   become: yes
   become_user: labuser
-  when: ("/vagrant/data" is exists)
+  when: ("/vagrant/data" is exists) and not ("/labuser/data" is exists)
 
 - name: ensure data output folder exists
   file:
@@ -105,7 +105,7 @@
     path: ~/data
   become: yes
   become_user: labuser
-  when: not ("/vagrant/data" is exists)
+  when: not ("/vagrant/data" is exists) and not ("/labuser/data" is exists)
 
 - name: make service folder
   file:
