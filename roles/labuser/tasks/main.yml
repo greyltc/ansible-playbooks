@@ -100,7 +100,8 @@
   when: ("/vagrant/data" is exists)
 
 - name: ensure data output folder exists
-  directory:
+  file:
+    state: directory
     path: ~/data
   become: yes
   become_user: labuser
