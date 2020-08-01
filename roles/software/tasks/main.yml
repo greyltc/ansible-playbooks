@@ -81,7 +81,8 @@
       - python-pyvisa-py
       - python-setuptools-scm-git-archive
       - python-plotly
-#      - python-dash
+      - python-dash
+      - python-dash-table
 #      - python-dash-daq
   become: yes
   become_user: aur_builder
