@@ -7,6 +7,14 @@
     group: nobody
     mode: 0777
 
+- name: upgrade all native packages
+  pacman:
+    update_cache: yes
+    upgrade: yes
+
+- name: upgrade all aur packages
+  aur: upgrade=yes use=yay aur_only=yes
+
 - name: install mosquitto
   pacman:
     name: mosquitto
