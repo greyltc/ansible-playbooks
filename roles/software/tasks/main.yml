@@ -83,6 +83,6 @@
       - python-plotly
       - python-dash
       - python-dash-table
-#      - python-dash-daq
+#      - python-dash-daq # /usr/lib/python3.8/site-packages/dash-1.13.4-py3.8.egg-info/requires.txt is likely breaking this build
   become: yes
   become_user: aur_builder
