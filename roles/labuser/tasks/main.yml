@@ -16,7 +16,7 @@
   user:
     name: "{{ user_name }}"
     password: "{{ hashed_pw }}"
-  when: getent_passwd[labuser] == none
+  when: getent_passwd[user_name] == none
 
 - name: setup groups
   user:
@@ -29,7 +29,7 @@
     name: labuser
     append: yes
     groups: aur
-  when: getent_group[aur] != none
+  when: getent_group['aur'] != none
 
 - name: Check if virtualbox-guest-utils is installed
   command: pacman -Q virtualbox-guest-utils
