@@ -1,4 +1,12 @@
 ---
+# needed by the software tag
+- name: make tmp directory
+  file:
+    path: /tmp/ansible
+    state: directory
+    group: nobody
+    mode: 0777
+
 - name: install mosquitto
   pacman:
     name: mosquitto
@@ -25,45 +33,32 @@
   file:
     path: /opt/software
     state: directory
-    owner: labuser
-    group: labuser
-    mode: 0775
 
 - name: git config name
-  become: yes
-  become_user: labuser
   git_config:
     scope: global
     name: user.name
-    value: "Lab User"
+    value: "root"
 
 - name: git config email
-  become: yes
-  become_user: labuser
   git_config:
     scope: global
     name: user.email
-    value: "labuser@measurebox.local"
+    value: "root@measurebox.local"
 
 - name: git config color
-  become: yes
-  become_user: labuser
   git_config:
     scope: global
     name: color.ui
     value: "true"
 
 - name: init repo
-  become: yes
-  become_user: labuser
   command: repo init -u https://github.com/greyltc/manifest.git # -b otter
   args:
     chdir: /opt/software
   when: not ("/opt/software/.repo" is directory)
 
 - name: sync repo
-  become: yes
-  become_user: labuser
   command: repo sync
   args:
     chdir: /opt/software
@@ -73,10 +68,10 @@
     path: /etc/environment
     line: PYTHONPATH=/opt/software/python
 
-# TODO handle deps in some better way (like with get_deps.sh scripts)
+# TODO handle our deps in some better way (like with get_deps.sh scripts)
 - name: install some deps
   pacman:
-    name:  python-systemd python-humanize python-paho-mqtt python-gobject webkit2gtk python-setuptools-scm python-pyserial
+    name:  python-systemd python-humanize python-paho-mqtt python-gobject webkit2gtk python-setuptools-scm python-pyserial python-numpy python-scipy python-mpmath
 
 - name: install some aur deps
   aur:
@@ -85,83 +80,8 @@
       - python-pyvisa
       - python-pyvisa-py
       - python-setuptools-scm-git-archive
+#      - python-plotly
+#      - python-dash
+#      - python-dash-daq
   become: yes
   become_user: aur_builder
-
-- name: link in the config file
-  file:
-    state: link
-    src: /vagrant/measurement_config.ini
-    path: ~/measurement_config.ini
-  become: yes
-  become_user: labuser
-
-- name: link in the data folder
-  file:
-    state: link
-    src: /vagrant/data
-    path: ~/data
-  become: yes
-  become_user: labuser
-
-#- name: make service folder
-#  file:
-#    state: directory
-#    path: ~/.config/systemd/user
-#  become: yes
-#  become_user: labuser
-
-- name: link in service
-  file:
-    state: link
-    src: /opt/software/source/central-control/config/utility-handler.service
-    path: ~/.config/systemd/user/utility-handler.service
-  become: yes
-  become_user: labuser
-
-#- name: make enable service user folder
-#  file:
-#    state: directory
-#    path: ~/.config/systemd/user
-#  become: yes
-#  become_user: labuser
-
-- name: link in enabled service
-  file:
-    state: link
-    src: /opt/software/source/central-control/config/utility-handler.service
-    path: ~/.config/systemd/user/default.target.wants/utility-handler.service
-  become: yes
-  become_user: labuser
-
-#- name: make autostart folder
-#  file:
-#    state: directory
-#    path: ~/.config/autostart
-#  become: yes
-#  become_user: labuser
-
-- name: link in launcher autostart
-  file:
-    state: link
-    src: /opt/software/source/control-ui/Control.desktop
-    path: ~/.config/autostart/Control.desktop
-  become: yes
-  become_user: labuser
-
-#- name: make apps folder
-#  file:
-#    state: directory
-#    path: ~/.local/share/applications
-#  become: yes
-#  become_user: labuser
-
-- name: link in launcher
-  file:
-    state: link
-    src: /opt/software/source/control-ui/Control.desktop
-    path: ~/.local/share/applications/Control.desktop
-  become: yes
-  become_user: labuser
-
-#TODO: make favorite
