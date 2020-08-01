@@ -1,14 +1,4 @@
 ---
-- name: make labuser
-  vars:
-    # created with:
-    # openssl passwd -salt saltysalt -1 the_password
-    hashed_pw: $1$saltysal$yHMhKxhp3YU8azihvlCHD1
-  user:
-    name: labuser
-    password: "{{ hashed_pw }}"
-    groups: wheel,uucp,video,users,audio,tty
-
 - name: Determine available groups
   getent:
     database: group
@@ -16,6 +6,23 @@
 - name: Determine available users
   getent:
     database: passwd
+
+- name: make user
+  vars:
+    # created with:
+    # openssl passwd -salt saltysalt -1 change_me
+    user_name: labuser
+    hashed_pw: $1$saltysal$26n01S/ZGnaY.LX7UxFfV/
+  user:
+    name: "{{ user_name }}"
+    password: "{{ hashed_pw }}"
+  when: not "'labuser' in getent_passwd"
+
+- name: setup groups
+  user:
+    name: labuser
+    append: yes
+    groups: wheel,uucp,video,users,audio,tty
 
 - name: add labuser to the aur group
   user:
@@ -60,7 +67,6 @@
   blockinfile:
     insertafter: '^\[daemon\]'
     path: /etc/gdm/custom.conf
-    #firstmatch: yes
     block: |
       TimedLogin=labuser
       TimedLoginEnable=True
@@ -72,4 +78,96 @@
     name: vagrant
     append: yes
     groups: labuser
-  when: ("/vagrant" is directory)
+  when: "'vagrant' in getent_passwd"
+
+- name: link in a pre-existing, external config file
+  file:
+    state: link
+    force: yes
+    src: /vagrant/measurement_config.ini
+    path: ~/measurement_config.ini
+  become: yes
+  become_user: labuser
+  when: ("/vagrant/measurement_config.ini" is exists)
+
+- name: link in a pre-existing, external data folder
+  file:
+    state: link
+    src: /vagrant/data
+    path: ~/data
+  become: yes
+  become_user: labuser
+  when: ("/vagrant/data" is exists)
+
+- name: ensure data output folder exists
+  directory:
+    path: ~/data
+  become: yes
+  become_user: labuser
+  when: not ("/vagrant/data" is exists)
+
+- name: make service folder
+  file:
+    state: directory
+    path: ~/.config/systemd/user
+  become: yes
+  become_user: labuser
+
+- name: link in service
+  file:
+    state: link
+    force: yes
+    src: /opt/software/source/central-control/config/utility-handler.service
+    path: ~/.config/systemd/user/utility-handler.service
+  become: yes
+  become_user: labuser
+
+- name: make enable service user folder
+  file:
+    state: directory
+    path: ~/.config/systemd/user/default.target.wants
+  become: yes
+  become_user: labuser
+
+- name: link in enabled service
+  file:
+    state: link
+    force: yes
+    src: /opt/software/source/central-control/config/utility-handler.service
+    path: ~/.config/systemd/user/default.target.wants/utility-handler.service
+  become: yes
+  become_user: labuser
+
+- name: make autostart folder
+  file:
+    state: directory
+    path: ~/.config/autostart
+  become: yes
+  become_user: labuser
+
+- name: link in launcher autostart
+  file:
+    state: link
+    force: yes
+    src: /opt/software/source/control-ui/Control.desktop
+    path: ~/.config/autostart/Control.desktop
+  become: yes
+  become_user: labuser
+
+- name: make apps folder
+  file:
+    state: directory
+    path: ~/.local/share/applications
+  become: yes
+  become_user: labuser
+
+- name: link in launcher
+  file:
+    state: link
+    force: yes
+    src: /opt/software/source/control-ui/Control.desktop
+    path: ~/.local/share/applications/Control.desktop
+  become: yes
+  become_user: labuser
+
+#TODO: make favorite
