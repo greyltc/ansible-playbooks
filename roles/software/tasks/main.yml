@@ -80,7 +80,7 @@
       - python-pyvisa
       - python-pyvisa-py
       - python-setuptools-scm-git-archive
-#      - python-plotly
+      - python-plotly
 #      - python-dash
 #      - python-dash-daq
   become: yes
