@@ -45,7 +45,7 @@
     after: 'name="idle-delay"'
     regexp: '300'
     replace: "0"
-    before: '<summary\>Time before session is considered idle'
+    before: '<summary>Time before session is considered idle'
   register: screenidle
 
 - name: disable machine sleeping
@@ -54,7 +54,7 @@
     after: 'name="sleep-inactive-ac-timeout"'
     regexp: '1200'
     replace: "0"
-    before: '<summary\>Sleep timeout computer when on AC'
+    before: '<summary>Sleep timeout computer when on AC'
   register: sleep
 
 - name: disable machine sleeping
@@ -66,11 +66,21 @@
     before: '<summary>Whether to hibernate, suspend or do nothing when inactive'
   register: sleep_type
 
+- name: disable machine sleeping
+  replace:
+    path: /usr/share/glib-2.0/schemas/org.gnome.settings-daemon.plugins.power.gschema.xml
+    after: 'name="idle-dim"'
+    regexp: 'true'
+    replace: "false"
+    before: '<summary>Dim the screen after a period of inactivity'
+  register: idle_dim
+
+
 - name: compile schemas
   command: glib-compile-schemas .
   args:
     chdir: /usr/share/glib-2.0/schemas
-  when: screensaver.changed or screenlocker.changed or screenidle.changed or sleep.changed
+  when: screensaver.changed or screenlocker.changed or screenidle.changed or sleep.changed or slee_type.changed or idle_dim.changed
 
 - name: make autologin group
   group:
