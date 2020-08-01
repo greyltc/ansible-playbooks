@@ -29,7 +29,7 @@
     name: labuser
     append: yes
     groups: aur
-  when: 'aur' in getent_group
+  when: getent_group[aur] != none
 
 - name: Check if virtualbox-guest-utils is installed
   command: pacman -Q virtualbox-guest-utils
