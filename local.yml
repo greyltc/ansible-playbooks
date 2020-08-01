@@ -1,6 +1,6 @@
 ---
 - name: software setup
-  hosts: localhost
+  hosts: all
   become: yes
   tasks:
     - import_role:
