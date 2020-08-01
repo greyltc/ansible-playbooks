@@ -51,11 +51,20 @@
 - name: disable machine sleeping
   replace:
     path: /usr/share/glib-2.0/schemas/org.gnome.settings-daemon.plugins.power.gschema.xml
-    after: 'name="sleep-inactive-battery-timeout"'
+    after: 'name="sleep-inactive-ac-timeout"'
     regexp: '1200'
     replace: "0"
     before: '<summary\>Sleep timeout computer when on AC'
   register: sleep
+
+- name: disable machine sleeping
+  replace:
+    path: /usr/share/glib-2.0/schemas/org.gnome.settings-daemon.plugins.power.gschema.xml
+    after: 'name="sleep-inactive-ac-type"'
+    regexp: 'suspend'
+    replace: "nothing"
+    before: '<summary>Whether to hibernate, suspend or do nothing when inactive'
+  register: sleep_type
 
 - name: compile schemas
   command: glib-compile-schemas .
