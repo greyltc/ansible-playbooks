@@ -94,3 +94,20 @@
 #      - python-dash-daq # /usr/lib/python3.8/site-packages/dash-1.13.4-py3.8.egg-info/requires.txt is likely breaking this build
   become: yes
   become_user: aur_builder
+  
+- name: loosen dash version reqs
+  replace:
+    path: /usr/lib/python3.8/site-packages/dash-1.13.4-py3.8.egg-info/requires.txt
+    after: 'Flask'
+    regexp: '=='
+    replace: ">="
+    before: 'future'
+  register: sleep
+  
+- name: install python-dash-daq
+  aur:
+    use: yay
+    name: 
+      - python-dash-daq # /usr/lib/python3.8/site-packages/dash-1.13.4-py3.8.egg-info/requires.txt is likely breaking this build
+  become: yes
+  become_user: aur_builder
