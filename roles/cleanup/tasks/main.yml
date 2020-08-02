@@ -31,7 +31,7 @@
 #  with_items: "{{ files_to_delete.files }}"
     
 - name: clean pacman packages
-  command: yes | pacman -Scc
+  command: 'yes | pacman -Scc'
 
 - name: clean aur packages
-  command: yes | pacman -Scc --cachedir /var/cache/makepkg/pkg
+  command: 'yes | pacman -Scc --cachedir /var/cache/makepkg/pkg'
