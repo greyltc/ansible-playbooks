@@ -4,15 +4,15 @@
     path: /home/aur_helper/.cache
     state: absent
 
-- name: aur_helper folder clean
-  file:
-    path: /home/aur_helper/.yarn
-    state: absent
-
 - name: remake aur_helper .cache
   file:
     path: /home/aur_helper/.cache
     state: directory
+
+- name: aur_helper folder clean
+  file:
+    path: /home/aur_helper/.yarn
+    state: absent
 
 - name: clean yay folder
   file:
@@ -32,8 +32,8 @@
     
 - name: clean pacman packages
   pacman:
-    extra_args: '-cc'
+    extra_args: '-Scc'
 
 - name: clean aur packages
   pacman:
-    extra_args: '-cc --cachedir /var/cache/makepkg/pkg'
+    extra_args: '-Scc --cachedir /var/cache/makepkg/pkg'
