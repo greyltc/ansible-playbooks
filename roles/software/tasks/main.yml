@@ -103,12 +103,12 @@
     replace: ">="
     before: 'future'
   register: sleep
-  when: /usr/lib/python3.8/site-packages/dash-1.13.4-py3.8.egg-info/requires.txt is exists
+  when: "/usr/lib/python3.8/site-packages/dash-1.13.4-py3.8.egg-info/requires.txt" is exists
   
 - name: install python-dash-daq
   aur:
     use: yay
     name: 
-      - python-dash-daq # /usr/lib/python3.8/site-packages/dash-1.13.4-py3.8.egg-info/requires.txt is likely breaking this build
+      - python-dash-daq
   become: yes
   become_user: aur_builder
