@@ -7,30 +7,6 @@
   getent:
     database: passwd
 
-- name: make user
-  vars:
-    # created with:
-    # openssl passwd -salt saltysalt -1 change_me
-    user_name: labuser
-    hashed_pw: $1$saltysal$26n01S/ZGnaY.LX7UxFfV/
-  user:
-    name: "{{ user_name }}"
-    password: "{{ hashed_pw }}"
-  when: user_name not in getent_passwd
-
-- name: setup groups
-  user:
-    name: labuser
-    append: yes
-    groups: wheel,uucp,video,users,audio,tty
-
-- name: add labuser to the aur group
-  user:
-    name: labuser
-    append: yes
-    groups: aur
-  when: getent_group['aur'] != none
-
 - name: Check if virtualbox-guest-utils is installed
   command: pacman -Q virtualbox-guest-utils
   register: virtualbox_guest_utils_installed
@@ -42,6 +18,56 @@
   register: virtualbox_guest_utils_nox_installed
   failed_when: no
   changed_when: no
+  
+- name: Check if gdm is installed
+  command: pacman -Q gdm
+  register: gdm_installed
+  failed_when: no
+  changed_when: no
+
+- name: make user
+  vars:
+    user_name: labuser
+    # created with:
+    # openssl passwd -salt saltysalt -1 change_me
+    hashed_pw: $1$saltysal$26n01S/ZGnaY.LX7UxFfV/
+  user:
+    name: "{{ user_name }}"
+    password: "{{ hashed_pw }}"
+  when: user_name not in getent_passwd
+
+- name: setup general purpose groups
+  user:
+    name: labuser
+    append: yes
+    groups: uucp,video,users,audio,tty
+
+- name: add labuser to the aur group
+  vars:
+    grp_name: aur
+  user:
+    name: labuser
+    append: yes
+    groups: aur
+  when: grp_name in getent_group
+  
+- name: add labuser to the vagrant group
+  vars:
+    grp_name: vagrant
+  user:
+    name: labuser
+    append: yes
+    groups: vagrant
+  when: grp_name in getent_group
+  
+- name: add vagrant to the labuser group
+  vars:
+    user_name: vagrant
+  user:
+    name: vagrant
+    append: yes
+    groups: labuser
+  when: user_name in getent_passwd
 
 - name: add labuser to vbox group
   user:
@@ -49,12 +75,6 @@
     append: yes
     groups: vboxsf
   when: virtualbox_guest_utils_nox_installed.rc == 0 or virtualbox_guest_utils_installed.rc == 0
-
-- name: Check if gdm is installed
-  command: pacman -Q gdm
-  register: gdm_installed
-  failed_when: no
-  changed_when: no
 
 - name: add labuser to autologin groups
   user:
@@ -72,14 +92,7 @@
       TimedLoginEnable=True
       TimedLoginDelay=5
   when: ("/etc/gdm/custom.conf" is file)
-
-- name: give vagrant labuser group
-  user:
-    name: vagrant
-    append: yes
-    groups: labuser
-  when: "'vagrant' in getent_passwd"
-
+  
 - name: link in a pre-existing, external config file
   file:
     state: link
