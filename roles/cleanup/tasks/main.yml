@@ -33,9 +33,9 @@
 - name: clean pacman packages
   pacman:
     extra_args: '-cc'
-  always_run: yes
+  check_mode: no
 
 - name: clean aur packages
   pacman:
     extra_args: '-cc --cachedir /var/cache/makepkg/pkg'
-  always_run: yes
+  check_mode: no
