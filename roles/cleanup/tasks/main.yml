@@ -1,25 +1,39 @@
 ---
-- name: clean yay folder
+- name: aur_helper folder clean
   file:
-    path: /home/aur_helper/.cache/yay
+    path: /home/aur_helper/.cache
     state: absent
 
-- name: clean yay folder
+- name: aur_helper folder clean
   file:
-    path: /home/vagrant/.cache/yay
+    path: /home/aur_helper/.yarn
     state: absent
+
+- name: remake aur_helper .cache
+  file:
+    path: /home/aur_helper/.cache
+    state: directory
 
 - name: clean yay folder
   file:
     path: /home/labuser/.cache/yay
     state: absent
 
+#- name: find pacman packages
+#  find:
+#    paths: /etc/Ansible
+#  register: files_to_delete
+
+#- name: delete pacman packages
+#  file:
+#    path: "{{ item.path }}"
+#    state: absent
+#  with_items: "{{ files_to_delete.files }}"
+    
 - name: clean pacman packages
-  file:
-    path: /var/cache/pacman/pkg/*
-    state: absent
+  pacman:
+    extra_args: '-cc'
 
 - name: clean aur packages
-  file:
-    path: /var/cache/makepkg/pkg/*
-    state: absent
+  pacman:
+    extra_args: '-cc --cachedir /var/cache/makepkg/pkg'
