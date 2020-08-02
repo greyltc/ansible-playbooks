@@ -17,7 +17,10 @@
       tags: provision
     - import_role:
        name: labuser
-      tags: user
+      tags: make_user
+    - import_role:
+       name: admin
+      tags: make_admin
     - import_role:
        name: software
       tags: software
