@@ -19,17 +19,26 @@
     path: /home/labuser/.cache/yay
     state: absent
 
-#- name: find pacman packages
-#  find:
-#    paths: /etc/Ansible
-#  register: files_to_delete
+- name: clean history
+  file:
+    path: /home/labuser/.bash_history
+    state: absent
 
-#- name: delete pacman packages
-#  file:
-#    path: "{{ item.path }}"
-#    state: absent
-#  with_items: "{{ files_to_delete.files }}"
-    
+- name: clean history
+  file:
+    path: /home/vagrant/.bash_history
+    state: absent
+
+- name: clean history
+  file:
+    path: /home/admin/.bash_history
+    state: absent
+
+- name: clean history
+  file:
+    path: /home/labuser/.bash_history
+    state: absent
+
 - name: clean pacman packages
   shell: yes | pacman -Scc
 
