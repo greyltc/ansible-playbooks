@@ -44,3 +44,7 @@
 
 - name: clean aur packages
   shell: yes | pacman -Scc --cachedir /var/cache/makepkg/pkg
+
+#TODO: clear journal
+#journalctl --rotate
+#journalctl --vacuum-time=1s
