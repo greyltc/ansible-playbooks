@@ -80,7 +80,7 @@
   command: glib-compile-schemas .
   args:
     chdir: /usr/share/glib-2.0/schemas
-  when: screensaver.changed or screenlocker.changed or screenidle.changed or sleep.changed or slee_type.changed or idle_dim.changed
+  when: screensaver.changed or screenlocker.changed or screenidle.changed or sleep.changed or sleep_type.changed or idle_dim.changed
 
 - name: make autologin group
   group:
