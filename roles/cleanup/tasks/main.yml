@@ -1,0 +1,25 @@
+---
+- name: clean yay folder
+  file:
+    path: /home/aur_helper/.cache/yay
+    state: absent
+
+- name: clean yay folder
+  file:
+    path: /home/vagrant/.cache/yay
+    state: absent
+
+- name: clean yay folder
+  file:
+    path: /home/labuser/.cache/yay
+    state: absent
+
+- name: clean pacman packages
+  file:
+    path: /var/cache/pacman/pkg/*
+    state: absent
+
+- name: clean aur packages
+  file:
+    path: /var/cache/makepkg/pkg/*
+    state: absent
