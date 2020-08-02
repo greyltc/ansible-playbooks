@@ -32,10 +32,12 @@
     
 - name: clean pacman packages
   pacman:
-    extra_args: '-Scc'
+    name: base
+    extra_args: '-cc --needed'
   changed_when: true
 
 - name: clean aur packages
   pacman:
-    extra_args: '-Scc --cachedir /var/cache/makepkg/pkg'
+    name: base
+    extra_args: '-cc --needed --cachedir /var/cache/makepkg/pkg'
   changed_when: true
