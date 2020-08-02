@@ -31,13 +31,7 @@
 #  with_items: "{{ files_to_delete.files }}"
     
 - name: clean pacman packages
-  pacman:
-    name: base
-    extra_args: '-cc --needed'
-  changed_when: true
+  command: pacman -Scc
 
 - name: clean aur packages
-  pacman:
-    name: base
-    extra_args: '-cc --needed --cachedir /var/cache/makepkg/pkg'
-  changed_when: true
+  command: pacman -Scc --cachedir /var/cache/makepkg/pkg
