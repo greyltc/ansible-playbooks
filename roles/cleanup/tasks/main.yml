@@ -21,21 +21,29 @@
 
 - name: clean history A
   shell: history -r
-  become: yes
-  become_user: vagrant
+  args:
+    executable: /usr/bin/bash
 
 - name: clean history B
+  shell: history -r
+  become: yes
+  become_user: vagrant
+  args:
+    executable: /usr/bin/bash
+
+- name: clean history C
   shell: history -r
   become: yes
   become_user: admin
+  args:
+    executable: /usr/bin/bash
 
-- name: clean history B
+- name: clean history D
   shell: history -r
   become: yes
   become_user: labuser
-
-- name: clean history A
-  shell: history -r
+  args:
+    executable: /usr/bin/bash
 
 #- name: clean history
 #  shell: history -r
