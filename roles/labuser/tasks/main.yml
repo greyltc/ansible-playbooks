@@ -24,6 +24,18 @@
   register: gdm_installed
   failed_when: no
   changed_when: no
+  
+- name: setup labuser login screen
+  copy:
+    dest: /var/lib/AccountsService/users/labuser
+    group: root
+    owner: root
+    mode: 600
+    content: |
+      [User]
+      XSession=gnome
+      SystemAccount=false
+  when: (accountsservice_installed.rc == 0)
 
 - name: make user
   vars:
