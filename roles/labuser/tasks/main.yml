@@ -145,7 +145,14 @@
   become: yes
   become_user: labuser
 
-- name: link user in service
+- name: make user enable service user folder
+  file:
+    state: directory
+    path: ~/.config/systemd/user/default.target.wants
+  become: yes
+  become_user: labuser
+
+- name: link user utility service
   file:
     state: link
     follow: no
@@ -155,20 +162,73 @@
   become: yes
   become_user: labuser
 
-- name: make user enable service user folder
-  file:
-    state: directory
-    path: ~/.config/systemd/user/default.target.wants
-  become: yes
-  become_user: labuser
-
-- name: link in enabled user service
+- name: link in enabled user utility service
   file:
     state: link
     follow: no
     force: yes
     src: /opt/software/source/central-control/config/utility-handler.service
     path: ~/.config/systemd/user/default.target.wants/utility-handler.service
+  become: yes
+  become_user: labuser
+
+- name: link user plotter service
+  file:
+    state: link
+    follow: no
+    force: yes
+    src: /opt/software/source/central-control/config/plotter.service
+    path: ~/.config/systemd/user/plotter.service
+  become: yes
+  become_user: labuser
+
+- name: link in enabled user plotter service
+  file:
+    state: link
+    follow: no
+    force: yes
+    src: /opt/software/source/central-control/config/plotter.service
+    path: ~/.config/systemd/user/default.target.wants/plotter.service
+  become: yes
+  become_user: labuser
+
+- name: link user saver service
+  file:
+    state: link
+    follow: no
+    force: yes
+    src: /opt/software/source/central-control/config/saver.service
+    path: ~/.config/systemd/user/saver.service
+  become: yes
+  become_user: labuser
+
+- name: link in enabled user saver service
+  file:
+    state: link
+    follow: no
+    force: yes
+    src: /opt/software/source/central-control/config/saver.service
+    path: ~/.config/systemd/user/default.target.wants/saver.service
+  become: yes
+  become_user: labuser
+
+- name: link user run service
+  file:
+    state: link
+    follow: no
+    force: yes
+    src: /opt/software/source/central-control/config/run-handler.service
+    path: ~/.config/systemd/user/saver.service
+  become: yes
+  become_user: labuser
+
+- name: link in enabled user run service
+  file:
+    state: link
+    follow: no
+    force: yes
+    src: /opt/software/source/central-control/config/run-handler.service
+    path: ~/.config/systemd/user/default.target.wants/run-handler.service
   become: yes
   become_user: labuser
 
