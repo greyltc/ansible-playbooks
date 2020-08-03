@@ -110,7 +110,21 @@
   failed_when: no
   changed_when: no
 
+
+- name: make user
+  vars:
+    user_name: labuser
+    # created with:
+    # openssl passwd -salt saltysalt -1 change_me
+    hashed_pw: $1$saltysal$26n01S/ZGnaY.LX7UxFfV/
+  user:
+    name: "{{ user_name }}"
+    password: "{{ hashed_pw }}"
+  when: user_name not in getent_passwd
+
 - name: vagrant user not on login page
+  vars:
+    user_name: vagrant
   copy:
     dest: /var/lib/AccountsService/users/vagrant
     group: root
@@ -120,7 +134,7 @@
       [User]
       XSession=gnome
       SystemAccount=true
-  when: accountsservice_installed.rc == 0 and "'vagrant' in getent_passwd"
+  when: (user_name in getent_passwd) and (accountsservice_installed.rc == 0)
   # only when the vagrant user exists and accountsservice is here
 
 - name: enable gdm service
