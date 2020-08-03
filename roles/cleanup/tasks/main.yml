@@ -1,5 +1,5 @@
 ---
-- name: aur_helper folder clean
+- name: aur_helper folder clean A
   file:
     path: /home/aur_helper/.cache
     state: absent
@@ -9,7 +9,7 @@
     path: /home/aur_helper/.cache
     state: directory
 
-- name: aur_helper folder clean
+- name: aur_helper folder clean B
   file:
     path: /home/aur_helper/.yarn
     state: absent
@@ -19,22 +19,22 @@
     path: /home/labuser/.cache/yay
     state: absent
 
-- name: clean history
+- name: clean history A
   file:
     path: /home/labuser/.bash_history
     state: absent
 
-- name: clean history
+- name: clean history B
   file:
     path: /home/vagrant/.bash_history
     state: absent
 
-- name: clean history
+- name: clean history C
   file:
     path: /home/admin/.bash_history
     state: absent
 
-- name: clean history
+- name: clean history D
   file:
     path: /home/labuser/.bash_history
     state: absent
@@ -45,6 +45,8 @@
 - name: clean aur packages
   shell: yes | pacman -Scc --cachedir /var/cache/makepkg/pkg
 
-#TODO: clear journal
-#journalctl --rotate
-#journalctl --vacuum-time=1s
+- name: clean journal A
+  shell: journalctl --rotate
+
+- name: clean journal B
+  shell: journalctl --vacuum-time=1s
