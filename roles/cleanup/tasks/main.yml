@@ -21,11 +21,13 @@
 
 - name: clean history A
   shell: history -r
+  ignore_errors: yes
   args:
     executable: /usr/bin/bash
 
 - name: clean history B
   shell: history -r
+  ignore_errors: yes
   become: yes
   become_user: vagrant
   args:
@@ -33,6 +35,7 @@
 
 - name: clean history C
   shell: history -r
+  ignore_errors: yes
   become: yes
   become_user: admin
   args:
@@ -40,6 +43,7 @@
 
 - name: clean history D
   shell: history -r
+  ignore_errors: yes
   become: yes
   become_user: labuser
   args:
