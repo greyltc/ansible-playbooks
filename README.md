@@ -3,7 +3,7 @@
 make this go with:
 ```
 sudo pacman -Syu ansible --needed
-ansible-pull -U https://github.com/greyltc/ansible-playbooks -C otter --ask-become-pass
+ansible-pull -U https://github.com/greyltc/ansible-playbooks -C otter --tags provision,make_user,make_admin,software,cleanup --ask-become-pass
 ```
 ### Notes
 This embeds the aur ansible playbook library because installing it and reloading the ansible module via ansible its self is not possible. Unfortunately that means that this module won't be updated unless I run the following to manually fetch the latest version into the repo.  
