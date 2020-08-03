@@ -115,8 +115,8 @@
   file:
     state: link
     force: yes
-    src: /vagrant/measurement_config.ini
-    path: ~/measurement_config.ini
+    src: /vagrant/measurement_config.yaml
+    path: ~/measurement_config.yaml
   become: yes
   become_user: labuser
   #when: ("/vagrant/measurement_config.ini" is exists)
