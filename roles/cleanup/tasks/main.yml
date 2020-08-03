@@ -20,24 +20,28 @@
     state: absent
 
 - name: clean history A
-  file:
-    path: /home/labuser/.bash_history
-    state: absent
+  shell: history -r
+  become: yes
+  become_user: vagrant
 
 - name: clean history B
-  file:
-    path: /home/vagrant/.bash_history
-    state: absent
+  shell: history -r
+  become: yes
+  become_user: admin
 
-- name: clean history C
-  file:
-    path: /home/admin/.bash_history
-    state: absent
+- name: clean history B
+  shell: history -r
+  become: yes
+  become_user: labuser
 
-- name: clean history D
-  file:
-    path: /home/labuser/.bash_history
-    state: absent
+- name: clean history A
+  shell: history -r
+
+#- name: clean history
+#  shell: history -r
+#  file:
+#    path: /home/vagrant/.bash_history
+#    state: absent
 
 - name: clean pacman packages
   shell: yes | pacman -Scc
