@@ -35,11 +35,12 @@
     system: yes
   when: ( virtualbox_guest_utils_nox_installed.rc == 0 or virtualbox_guest_utils_installed.rc == 0 ) and "'vagrant' in getent_passwd"
 
-- name: install vagrant public ssh key
-  get_url:
-    url: https://raw.githubusercontent.com/hashicorp/vagrant/master/keys/vagrant.pub
-    dest: /home/vagrant/.ssh/authorized_keys
-    mode: '0600'
-    force: yes
-  become: yes
-  become_user: vagrant
+# commented in favor of doing this in the packaging step
+#- name: install vagrant public ssh key
+#  get_url:
+#    url: https://raw.githubusercontent.com/hashicorp/vagrant/master/keys/vagrant.pub
+#    dest: /home/vagrant/.ssh/authorized_keys
+#    mode: '0600'
+#    force: yes
+#  become: yes
+#  become_user: vagrant
