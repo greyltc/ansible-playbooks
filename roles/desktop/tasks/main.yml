@@ -110,7 +110,6 @@
   failed_when: no
   changed_when: no
 
-
 - name: make user
   vars:
     user_name: labuser
