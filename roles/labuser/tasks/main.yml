@@ -111,7 +111,7 @@
       TimedLoginDelay=5
   when: ("/etc/gdm/custom.conf" is file)
   
-- name: link in a pre-existing, external config file
+- name: link in a pre-existing (or not), external config file
   file:
     state: link
     force: yes
@@ -121,8 +121,9 @@
   become_user: labuser
   #when: ("/vagrant/measurement_config.ini" is exists)
 
-- name: link in a pre-existing, external data folder
+- name: link in a pre-existing (or not), external data folder
   file:
+    force: ues
     state: link
     src: /vagrant/data
     path: ~/data
