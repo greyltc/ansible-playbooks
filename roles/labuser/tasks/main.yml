@@ -123,7 +123,7 @@
 
 - name: link in a pre-existing (or not), external data folder
   file:
-    force: ues
+    force: yes
     state: link
     src: /vagrant/data
     path: ~/data
