@@ -101,7 +101,7 @@
     path: ~/measurement_config.ini
   become: yes
   become_user: labuser
-  when: ("/vagrant/measurement_config.ini" is exists)
+  #when: ("/vagrant/measurement_config.ini" is exists)
 
 - name: link in a pre-existing, external data folder
   file:
@@ -110,15 +110,15 @@
     path: ~/data
   become: yes
   become_user: labuser
-  when: ("/vagrant/data" is exists) and (not ("/home/labuser/data" is exists))
+  #when: ("/vagrant/data" is exists) and (not ("/home/labuser/data" is exists))
 
-- name: make a data folder if needed
-  file:
-    state: directory
-    path: ~/data
-  become: yes
-  become_user: labuser
-  when: not ("/home/labuser/data" is exists)
+#- name: make a data folder if needed
+#  file:
+#    state: directory
+#    path: ~/data
+#  become: yes
+#  become_user: labuser
+#  when: not ("/home/labuser/data" is exists)
 
 - name: make user service folder
   file:
