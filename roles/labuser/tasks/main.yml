@@ -7,6 +7,12 @@
   getent:
     database: passwd
 
+- name: Check if accountsservice is installed
+  command: pacman -Q accountsservice
+  register: accountsservice_installed
+  failed_when: no
+  changed_when: no
+
 - name: Check if virtualbox-guest-utils is installed
   command: pacman -Q virtualbox-guest-utils
   register: virtualbox_guest_utils_installed
