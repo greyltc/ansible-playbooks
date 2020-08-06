@@ -259,7 +259,7 @@
 # TODO: loop through these vars
 - name: link plotter service 5
   vars:
-    pservice: eue_plotter
+    pservice: eqe_plotter
   file:
     state: link
     follow: no
