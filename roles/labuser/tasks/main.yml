@@ -61,31 +61,25 @@
     groups: uucp,video,users,audio,tty
 
 - name: add labuser to the aur group
-  vars:
-    grp_name: aur
   user:
     name: labuser
     append: yes
     groups: aur
-  when: grp_name in getent_group
+  when: "aur" in getent_group
   
 - name: add labuser to the vagrant group
-  vars:
-    grp_name: vagrant
   user:
     name: labuser
     append: yes
     groups: vagrant
-  when: grp_name in getent_group
+  when: "vagrant" in getent_group
   
 - name: add vagrant to the labuser group
-  vars:
-    user_name: vagrant
   user:
     name: vagrant
     append: yes
     groups: labuser
-  when: user_name in getent_passwd
+  when: "vagrant" in getent_passwd
 
 - name: add labuser to vbox group
   user:
@@ -119,6 +113,7 @@
     path: ~/measurement_config.yaml
   become: yes
   become_user: labuser
+  when: "vagrant" in getent_passwd
   #when: ("/vagrant/measurement_config.ini" is exists)
 
 - name: link in a pre-existing (or not), external data folder
@@ -129,6 +124,7 @@
     path: ~/data
   become: yes
   become_user: labuser
+  when: "vagrant" in getent_passwd
   #when: ("/vagrant/data" is exists) and (not ("/home/labuser/data" is exists))
 
 #- name: make a data folder if needed
