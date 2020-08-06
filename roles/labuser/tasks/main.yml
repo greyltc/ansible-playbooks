@@ -149,6 +149,139 @@
   become: yes
   become_user: labuser
 
+  vars:
+    user_name: labuser
+
+# TODO: loop through these vars
+- name: link plotter service 1
+  vars:
+    pservice: vt_plotter
+  file:
+    state: link
+    follow: no
+    force: yes
+    src: /opt/software/source/central-control/config/"{{  pservice  }}".service
+    path: ~/.config/systemd/user/"{{  pservice  }}".service
+  become: yes
+  become_user: labuser
+
+# TODO: loop through these vars
+- name: link in enabled plotter service 1
+  vars:
+    pservice: vt_plotter
+  file:
+    state: link
+    follow: no
+    force: yes
+    src: /opt/software/source/central-control/config/"{{  pservice  }}".service
+    path: ~/.config/systemd/user/default.target.wants/"{{  pservice  }}".service
+  become: yes
+  become_user: labuser
+  
+# TODO: loop through these vars
+- name: link plotter service 2
+  vars:
+    pservice: iv_plotter
+  file:
+    state: link
+    follow: no
+    force: yes
+    src: /opt/software/source/central-control/config/"{{  pservice  }}".service
+    path: ~/.config/systemd/user/"{{  pservice  }}".service
+  become: yes
+  become_user: labuser
+
+# TODO: loop through these vars
+- name: link in enabled plotter service 2
+  vars:
+    pservice: iv_plotter
+  file:
+    state: link
+    follow: no
+    force: yes
+    src: /opt/software/source/central-control/config/"{{  pservice  }}".service
+    path: ~/.config/systemd/user/default.target.wants/"{{  pservice  }}".service
+  become: yes
+  become_user: labuser
+
+# TODO: loop through these vars
+- name: link plotter service 3
+  vars:
+    pservice: mppt_plotter
+  file:
+    state: link
+    follow: no
+    force: yes
+    src: /opt/software/source/central-control/config/"{{  pservice  }}".service
+    path: ~/.config/systemd/user/"{{  pservice  }}".service
+  become: yes
+  become_user: labuser
+
+# TODO: loop through these vars
+- name: link in enabled plotter service 3
+  vars:
+    pservice: mppt_plotter
+  file:
+    state: link
+    follow: no
+    force: yes
+    src: /opt/software/source/central-control/config/"{{  pservice  }}".service
+    path: ~/.config/systemd/user/default.target.wants/"{{  pservice  }}".service
+  become: yes
+  become_user: labuser
+  
+# TODO: loop through these vars
+- name: link plotter service 4
+  vars:
+    pservice: it_plotter
+  file:
+    state: link
+    follow: no
+    force: yes
+    src: /opt/software/source/central-control/config/"{{  pservice  }}".service
+    path: ~/.config/systemd/user/"{{  pservice  }}".service
+  become: yes
+  become_user: labuser
+
+# TODO: loop through these vars
+- name: link in enabled plotter service 4
+  vars:
+    pservice: it_plotter
+  file:
+    state: link
+    follow: no
+    force: yes
+    src: /opt/software/source/central-control/config/"{{  pservice  }}".service
+    path: ~/.config/systemd/user/default.target.wants/"{{  pservice  }}".service
+  become: yes
+  become_user: labuser
+
+# TODO: loop through these vars
+- name: link plotter service 5
+  vars:
+    pservice: eue_plotter
+  file:
+    state: link
+    follow: no
+    force: yes
+    src: /opt/software/source/central-control/config/"{{  pservice  }}".service
+    path: ~/.config/systemd/user/"{{  pservice  }}".service
+  become: yes
+  become_user: labuser
+
+# TODO: loop through these vars
+- name: link in enabled plotter service 5
+  vars:
+    pservice: eqe_plotter
+  file:
+    state: link
+    follow: no
+    force: yes
+    src: /opt/software/source/central-control/config/"{{  pservice  }}".service
+    path: ~/.config/systemd/user/default.target.wants/"{{  pservice  }}".service
+  become: yes
+  become_user: labuser
+
 - name: link user utility service
   file:
     state: link
@@ -166,26 +299,6 @@
     force: yes
     src: /opt/software/source/central-control/config/utility-handler.service
     path: ~/.config/systemd/user/default.target.wants/utility-handler.service
-  become: yes
-  become_user: labuser
-
-- name: link user plotter service
-  file:
-    state: link
-    follow: no
-    force: yes
-    src: /opt/software/source/central-control/config/plotter.service
-    path: ~/.config/systemd/user/plotter.service
-  become: yes
-  become_user: labuser
-
-- name: link in enabled user plotter service
-  file:
-    state: link
-    follow: no
-    force: yes
-    src: /opt/software/source/central-control/config/plotter.service
-    path: ~/.config/systemd/user/default.target.wants/plotter.service
   become: yes
   become_user: labuser
 
