@@ -65,7 +65,7 @@
     name: labuser
     append: yes
     groups: aur
-  when: "aur" in getent_group
+  when: 'aur' in getent_group
   
 - name: add labuser to the vagrant group
   user:
