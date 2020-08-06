@@ -173,8 +173,8 @@
     state: link
     follow: no
     force: yes
-    src: /opt/software/source/central-control/config/"{{  pservice  }}".service
-    path: ~/.config/systemd/user/default.target.wants/"{{  pservice  }}".service
+    src: /opt/software/source/central-control/config/{{  pservice  }}.service
+    path: ~/.config/systemd/user/default.target.wants/{{  pservice  }}.service
   become: yes
   become_user: labuser
   
@@ -186,8 +186,8 @@
     state: link
     follow: no
     force: yes
-    src: /opt/software/source/central-control/config/"{{  pservice  }}".service
-    path: ~/.config/systemd/user/"{{  pservice  }}".service
+    src: /opt/software/source/central-control/config/{{  pservice  }}.service
+    path: ~/.config/systemd/user/{{  pservice  }}.service
   become: yes
   become_user: labuser
 
@@ -199,8 +199,8 @@
     state: link
     follow: no
     force: yes
-    src: /opt/software/source/central-control/config/"{{  pservice  }}".service
-    path: ~/.config/systemd/user/default.target.wants/"{{  pservice  }}".service
+    src: /opt/software/source/central-control/config/{{  pservice  }}.service
+    path: ~/.config/systemd/user/default.target.wants/{{  pservice  }}.service
   become: yes
   become_user: labuser
 
@@ -212,8 +212,8 @@
     state: link
     follow: no
     force: yes
-    src: /opt/software/source/central-control/config/"{{  pservice  }}".service
-    path: ~/.config/systemd/user/"{{  pservice  }}".service
+    src: /opt/software/source/central-control/config/{{  pservice  }}.service
+    path: ~/.config/systemd/user/{{  pservice  }}.service
   become: yes
   become_user: labuser
 
@@ -225,8 +225,8 @@
     state: link
     follow: no
     force: yes
-    src: /opt/software/source/central-control/config/"{{  pservice  }}".service
-    path: ~/.config/systemd/user/default.target.wants/"{{  pservice  }}".service
+    src: /opt/software/source/central-control/config/{{  pservice  }}.service
+    path: ~/.config/systemd/user/default.target.wants/{{  pservice  }}.service
   become: yes
   become_user: labuser
   
@@ -238,8 +238,8 @@
     state: link
     follow: no
     force: yes
-    src: /opt/software/source/central-control/config/"{{  pservice  }}".service
-    path: ~/.config/systemd/user/"{{  pservice  }}".service
+    src: /opt/software/source/central-control/config/{{  pservice  }}.service
+    path: ~/.config/systemd/user/{{  pservice  }}.service
   become: yes
   become_user: labuser
 
@@ -251,8 +251,8 @@
     state: link
     follow: no
     force: yes
-    src: /opt/software/source/central-control/config/"{{  pservice  }}".service
-    path: ~/.config/systemd/user/default.target.wants/"{{  pservice  }}".service
+    src: /opt/software/source/central-control/config/{{  pservice  }}.service
+    path: ~/.config/systemd/user/default.target.wants/{{  pservice  }}.service
   become: yes
   become_user: labuser
 
@@ -264,8 +264,8 @@
     state: link
     follow: no
     force: yes
-    src: /opt/software/source/central-control/config/"{{  pservice  }}".service
-    path: ~/.config/systemd/user/"{{  pservice  }}".service
+    src: /opt/software/source/central-control/config/{{  pservice  }}.service
+    path: ~/.config/systemd/user/{{  pservice  }}.service
   become: yes
   become_user: labuser
 
@@ -277,8 +277,8 @@
     state: link
     follow: no
     force: yes
-    src: /opt/software/source/central-control/config/"{{  pservice  }}".service
-    path: ~/.config/systemd/user/default.target.wants/"{{  pservice  }}".service
+    src: /opt/software/source/central-control/config/{{  pservice  }}.service
+    path: ~/.config/systemd/user/default.target.wants/{{  pservice  }}.service
   become: yes
   become_user: labuser
 
