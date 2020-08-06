@@ -72,14 +72,14 @@
     name: labuser
     append: yes
     groups: vagrant
-  when: "vagrant" in getent_group
+  when: "'vagrant' in getent_group"
   
 - name: add vagrant to the labuser group
   user:
     name: vagrant
     append: yes
     groups: labuser
-  when: "vagrant" in getent_passwd
+  when: "'vagrant' in getent_passwd"
 
 - name: add labuser to vbox group
   user:
@@ -113,7 +113,7 @@
     path: ~/measurement_config.yaml
   become: yes
   become_user: labuser
-  when: "vagrant" in getent_passwd
+  when: "'vagrant' in getent_passwd"
   #when: ("/vagrant/measurement_config.ini" is exists)
 
 - name: link in a pre-existing (or not), external data folder
@@ -124,7 +124,7 @@
     path: ~/data
   become: yes
   become_user: labuser
-  when: "vagrant" in getent_passwd
+  when: "'vagrant' in getent_passwd"
   #when: ("/vagrant/data" is exists) and (not ("/home/labuser/data" is exists))
 
 #- name: make a data folder if needed
