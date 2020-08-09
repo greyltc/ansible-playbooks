@@ -30,6 +30,12 @@
     path: /etc/mosquitto/mosquitto.conf
     regexp: '^#persistence_location'
     line: "persistence_location /var/lib/mosquitto/"
+    
+- name: create mosquitto persistence path
+  file:
+    path: /var/lib/mosquitto
+    type: directory
+    owner: mosquitto
 
 - name: enable mosquitto service
   systemd:
