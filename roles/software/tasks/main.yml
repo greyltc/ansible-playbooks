@@ -126,13 +126,17 @@
     updpkgsums
     makepkg -Cfi
     rm -rf python-dash-renderer
-    su -c 'echo "IgnorePkg = python-dash-renderer" > /etc/pacman.conf' # PACKAGE DOWNGRADE!!!!
     popd
     exit 0
   args:
     executable: /usr/bin/bash
   become: yes
   become_user: aur_builder
+
+- name: do not upgrade dash-renderer
+  lineinfile:
+    path: /etc/pacman.conf
+    line: IgnorePkg = python-dash-renderer
 
 - name: install python-dash-html-components
   shell: |
