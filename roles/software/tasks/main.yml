@@ -109,20 +109,20 @@
     cd python-dash-renderer
     #sed -i 's,pkgver=1.8.0,pkgver=1.7.0,g' PKGBUILD # THIS IS A DOWNGRADE!!!
     updpkgsums
-    makepkg -Cfi
+    yes | makepkg -Cfi
     rm -rf /tmp/python-dash-renderer
   args:
     executable: /usr/bin/bash
   become: yes
   become_user: aur_builder
 
-- name: do not upgrade dash-renderer
-  shell: |
-    set -e
-    sed '/^\[options\].*/a IgnorePkg = python-dash-renderer' -i /etc/pacman.conf
-  args:
-    executable: /usr/bin/bash
-    warn: false
+#- name: do not upgrade dash-renderer
+#  shell: |
+#    set -e
+#    sed '/^\[options\].*/a IgnorePkg = python-dash-renderer' -i /etc/pacman.conf
+#  args:
+#    executable: /usr/bin/bash
+#    warn: false
 
 - name: install python-dash-html-components
   shell: |
@@ -132,7 +132,7 @@
     cd python-dash-html-components
     #sed -i 's,pkgver=1.0.3,pkgver=1.1.0,g' PKGBUILD
     updpkgsums
-    makepkg -Cfi
+    yes | makepkg -Cfi
     rm -rf /tmp/python-dash-html-components
   args:
     executable: /usr/bin/bash
@@ -147,7 +147,7 @@
     cd python-dash-core-components
     #sed -i 's,pkgver=1.10.1,pkgver=1.11.0,g' PKGBUILD
     updpkgsums
-    makepkg -Cfi
+    yes | makepkg -Cfi
     rm -rf /tmp/python-dash-core-components
   args:
     executable: /usr/bin/bash
@@ -173,7 +173,7 @@
     cd python-dash
     #sed -i 's,pkgver=1.15.0,pkgver=1.16.1,g' PKGBUILD
     updpkgsums
-    makepkg -Cfi
+    yes | makepkg -Cfi
     rm -rf /tmp/python-dash
   args:
     executable: /usr/bin/bash
