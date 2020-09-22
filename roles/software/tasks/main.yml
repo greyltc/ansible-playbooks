@@ -103,6 +103,7 @@
 
 - name: install python-dash
   shell: |
+    set -e
     pushd /tmp
     rm -rf python-dash
     yay -G python-dash
@@ -119,6 +120,7 @@
 
 - name: install python-dash-renderer
   shell: |
+    set -e
     pushd /tmp
     yay -G python-dash-renderer
     cd python-dash-renderer
@@ -135,6 +137,7 @@
 
 - name: do not upgrade dash-renderer
   shell: |
+    set -e
     sed '/^\[options\].*/a IgnorePkg = python-dash-renderer' -i /etc/pacman.conf
     exit 0
   args:
@@ -143,6 +146,7 @@
 
 - name: install python-dash-html-components
   shell: |
+    set -e
     pushd /tmp
     yay -G python-dash-html-components
     cd python-dash-html-components
@@ -159,6 +163,7 @@
 
 - name: install python-dash-core-components
   shell: |
+    set -e
     pushd /tmp
     yay -G python-dash-core-components
     cd python-dash-core-components
