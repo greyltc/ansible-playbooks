@@ -126,7 +126,7 @@
     updpkgsums
     makepkg -Cfi
     rm -rf python-dash-renderer
-    su -c 'echo "IgnorePkg = python-dash-renderer" > /etc/pacman.conf'
+    su -c 'echo "IgnorePkg = python-dash-renderer" > /etc/pacman.conf' # PACKAGE DOWNGRADE!!!!
     popd
     exit 0
   args:
