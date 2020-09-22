@@ -34,7 +34,7 @@
 - name: create mosquitto persistence path
   file:
     path: /var/lib/mosquitto
-    type: directory
+    state: directory
     owner: mosquitto
 
 - name: enable mosquitto service
