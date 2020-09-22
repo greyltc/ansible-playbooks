@@ -100,24 +100,7 @@
 #      - python-dash-daq # /usr/lib/python3.8/site-packages/dash-1.13.4-py3.8.egg-info/requires.txt is likely breaking this build
   become: yes
   become_user: aur_builder
-
-- name: install python-dash
-  shell: |
-    set -e
-    pushd /tmp
-    rm -rf python-dash
-    yay -G python-dash
-    cd python-dash
-    #sed -i 's,pkgver=1.15.0,pkgver=1.16.1,g' PKGBUILD
-    updpkgsums
-    makepkg -Cfi
-    popd
-    exit 0
-  args:
-    executable: /usr/bin/bash
-  become: yes
-  become_user: aur_builder
-
+  
 - name: install python-dash-renderer
   shell: |
     set -e
@@ -177,6 +160,35 @@
     executable: /usr/bin/bash
   become: yes
   become_user: aur_builder
+
+- name: install some final dash deps
+  aur:
+    use: yay
+    name: 
+      - python-flask
+      - python-flask-compress
+      - python-flask-seasurf
+      - python-future
+  become: yes
+  become_user: aur_builder
+
+- name: install python-dash
+  shell: |
+    set -e
+    pushd /tmp
+    rm -rf python-dash
+    yay -G python-dash
+    cd python-dash
+    #sed -i 's,pkgver=1.15.0,pkgver=1.16.1,g' PKGBUILD
+    updpkgsums
+    makepkg -Cfi
+    popd
+    exit 0
+  args:
+    executable: /usr/bin/bash
+  become: yes
+  become_user: aur_builder
+
 
 - name: fix for dash-table version does not exist
   replace:
