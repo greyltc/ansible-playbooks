@@ -134,9 +134,11 @@
   become_user: aur_builder
 
 - name: do not upgrade dash-renderer
-  lineinfile:
-    path: /etc/pacman.conf
-    line: IgnorePkg = python-dash-renderer
+  shell: |
+    sed '/^\[options\].*/a IgnorePkg = python-dash-renderer' -i /etc/pacman.conf
+    exit 0
+  args:
+    executable: /usr/bin/bash
 
 - name: install python-dash-html-components
   shell: |
