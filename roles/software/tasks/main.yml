@@ -101,15 +101,20 @@
   become: yes
   become_user: aur_builder
   
-- name: loosen dash version reqs
-  replace:
-    path: /usr/lib/python3.8/site-packages/dash-1.13.4-py3.8.egg-info/requires.txt
-    after: 'Flask'
-    regexp: '=='
-    replace: ">="
-    before: 'future'
-  when: "'/usr/lib/python3.8/site-packages/dash-1.13.4-py3.8.egg-info/requires.txt' is file"
-  
+- name: use newer python-dash-html-components
+  shell: |
+    pushd /tmp
+    yay -G python-dash-html-components
+    cd python-dash-html-components
+    sed -i 's,pkgver=1.0.3,pkgver=1.1.0,g' PKGBUILD
+    updpkgsums
+    makepkg -Cfi
+    exit 0
+  args:
+    executable: /usr/bin/bash
+  become: yes
+  become_user: aur_builder
+
 - name: install python-dash-daq
   aur:
     use: yay
