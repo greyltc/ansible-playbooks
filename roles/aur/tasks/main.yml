@@ -1,7 +1,7 @@
 ---
 - name: install git and base devel group and go for yay
   pacman:
-    name: base-devel git go
+    name: base-devel git go pacman-contrib
 
 - name: make aur group
   group:
