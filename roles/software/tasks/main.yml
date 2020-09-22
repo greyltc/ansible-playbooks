@@ -178,6 +178,15 @@
   become: yes
   become_user: aur_builder
 
+- name: fix for dash-table version does not exist
+  replace:
+    path: /usr/lib/python3.8/site-packages/dash-1.16.1-py3.8.egg-info/requires.txt
+    after: 'dash-table'
+    regexp: '4.10.1'
+    replace: "4.10.0"
+    before: 'future'
+  when: "'/usr/lib/python3.8/site-packages/dash-1.16.1-py3.8.egg-info/requires.txt' is file"
+
 - name: install python-dash-daq
   aur:
     use: yay
