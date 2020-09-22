@@ -95,35 +95,19 @@
       - python-pyvisa-py
       - python-setuptools-scm-git-archive
       - python-plotly
-      - python-dash
-      - python-dash-table
+#      - python-dash
+#      - python-dash-table
 #      - python-dash-daq # /usr/lib/python3.8/site-packages/dash-1.13.4-py3.8.egg-info/requires.txt is likely breaking this build
   become: yes
   become_user: aur_builder
 
-- name: use newer python-dash
+- name: install python-dash
   shell: |
     pushd /tmp
     rm -rf python-dash
     yay -G python-dash
     cd python-dash
-    sed -i 's,pkgver=1.15.0,pkgver=1.16.1,g' PKGBUILD
-    updpkgsums
-    makepkg -Cfi
-    popd
-    exit 0
-  args:
-    executable: /usr/bin/bash
-  become: yes
-  become_user: aur_builder
-  
-- name: use newer python-dash-html-components
-  shell: |
-    pushd /tmp
-    rm -rf python-dash-html-components
-    yay -G python-dash-html-components
-    cd python-dash-html-components
-    sed -i 's,pkgver=1.0.3,pkgver=1.1.0,g' PKGBUILD
+    #sed -i 's,pkgver=1.15.0,pkgver=1.16.1,g' PKGBUILD
     updpkgsums
     makepkg -Cfi
     popd
@@ -133,15 +117,64 @@
   become: yes
   become_user: aur_builder
 
-- name: use newer python-dash-core-components
+- name: install python-dash-renderer
   shell: |
     pushd /tmp
-    rm -rf python-dash-core-components
-    yay -G python-dash-core-components
+    yay -G python-dash-renderer
+    cd python-dash-renderer
+    sed -i 's,pkgver=1.8.0,pkgver=1.7.0,g' PKGBUILD
+    updpkgsums
+    makepkg -Cfi
+    rm -rf python-dash-renderer
+    su -c 'echo "IgnorePkg = python-dash-renderer" > /etc/pacman.conf'
+    popd
+    exit 0
+  args:
+    executable: /usr/bin/bash
+  become: yes
+  become_user: aur_builder
+
+- name: install python-dash-html-components
+  shell: |
+    pushd /tmp
+    yay -G python-dash-html-components
     cd python-dash-html-components
+    sed -i 's,pkgver=1.0.3,pkgver=1.1.0,g' PKGBUILD
+    updpkgsums
+    makepkg -Cfi
+    rm -rf python-dash-html-components
+    popd
+    exit 0
+  args:
+    executable: /usr/bin/bash
+  become: yes
+  become_user: aur_builder
+
+- name: install python-dash-core-components
+  shell: |
+    pushd /tmp
+    yay -G python-dash-core-components
+    cd python-dash-core-components
     sed -i 's,pkgver=1.10.1,pkgver=1.11.0,g' PKGBUILD
     updpkgsums
     makepkg -Cfi
+    rm -rf python-dash-core-components
+    popd
+    exit 0
+  args:
+    executable: /usr/bin/bash
+  become: yes
+  become_user: aur_builder
+
+- name: install python-dash-core-components
+  shell: |
+    pushd /tmp
+    yay -G python-dash-core-components
+    cd python-dash-core-components
+    sed -i 's,pkgver=1.10.1,pkgver=1.11.0,g' PKGBUILD
+    updpkgsums
+    makepkg -Cfi
+    rm -rf python-dash-core-components
     popd
     exit 0
   args:
