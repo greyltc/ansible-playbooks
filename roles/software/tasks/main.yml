@@ -95,6 +95,8 @@
       - python-pyvisa-py
       - python-setuptools-scm-git-archive
       - python-plotly
+      - python-boltons
+      - python-drawsvg
 #      - python-dash
 #      - python-dash-table
 #      - python-dash-daq # /usr/lib/python3.8/site-packages/dash-1.13.4-py3.8.egg-info/requires.txt is likely breaking this build
@@ -179,7 +181,6 @@
     executable: /usr/bin/bash
   become: yes
   become_user: aur_builder
-
 
 - name: fix for dash-table version does not exist
   replace:
