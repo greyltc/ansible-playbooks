@@ -85,7 +85,19 @@
 # TODO handle our deps in some better way (like with get_deps.sh scripts)
 - name: install some deps
   pacman:
-    name:  python-systemd python-humanize python-paho-mqtt python-gobject webkit2gtk python-setuptools-scm python-pyserial python-numpy python-scipy python-mpmath gnumeric
+    state: latest
+    name:
+      - python-systemd
+      - python-humanize
+      - python-paho-mqtt
+      - python-gobject
+      - webkit2gtk 
+      - python-setuptools-scm 
+      - python-pyserial
+      - python-numpy
+      - python-scipy 
+      - python-mpmath 
+      - gnumeric
 
 - name: install some aur deps
   aur:
