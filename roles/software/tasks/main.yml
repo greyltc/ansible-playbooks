@@ -67,7 +67,7 @@
     value: "true"
 
 - name: init repo
-  command: repo init -u https://github.com/greyltc/manifest.git # -b otter
+  command: repo init -u https://github.com/greyltc/manifest.git -b master
   args:
     chdir: /opt/software
   when: not ("/opt/software/.repo" is directory)
